@@ -1,12 +1,10 @@
 <template>
   <v-container>
     <v-app-bar app color="primary">
-      <!-- Left-aligned title -->
       <v-app-bar-title>
         NAUJAN HEALTH CARE CENTER
       </v-app-bar-title>
 
-      <!-- Right-aligned buttons -->
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Home</v-btn>
       <v-btn @click="navigateTo('/about')">About</v-btn>
@@ -27,7 +25,6 @@
               <v-btn type="submit" color="primary">Submit</v-btn>
             </v-form>
 
-            <!-- Email and Contact Number -->
             <v-divider></v-divider>
             <p>Email: info@naujanhealthcare.com</p>
             <p>Contact Number: +123 456 7890</p>

@@ -1,11 +1,9 @@
 <template>
   <v-app-bar app color="primary">
-    <!-- Left-aligned title -->
     <v-app-bar-title>
       NAUJAN HEALTH CARE CENTER
     </v-app-bar-title>
 
-    <!-- Right-aligned buttons -->
     <v-spacer></v-spacer>
     <v-btn @click="navigateTo('/')">Home</v-btn>
   </v-app-bar>

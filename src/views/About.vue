@@ -1,18 +1,16 @@
 <template>
     <v-container fluid>
-      <!-- Registration and Sign In Buttons -->
       <v-row class="registration-row" justify="end">
         <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
         <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
       </v-row>
   
       <v-app-bar app color="primary">
-        <!-- Left-aligned title -->
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-app-bar-title>
           NAUJAN HEALTH CARE CENTER
         </v-app-bar-title>
   
-        <!-- Right-aligned buttons -->
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Home</v-btn>
         <v-btn @click="navigateTo('/About')">About</v-btn>
@@ -25,8 +23,7 @@
           Welcome to Naujan Health Care Center! We are dedicated to providing high-quality healthcare services to our community.
           Our team of experienced healthcare professionals is committed to your well-being and ensuring that you receive the best care possible.
         </p>
-  
-        <!-- Placeholder for pictures -->
+
         <v-row>
           <v-col v-for="image in images" :key="image.id" cols="12" md="4">
             <v-img :src="image.src" alt="Healthcare Image"></v-img>
@@ -52,7 +49,6 @@
           { id: 1, imageUrl: 'https://via.placeholder.com/600x400' },
           { id: 2, src: 'path/to/image2.jpg' },
           { id: 3, src: 'path/to/image3.jpg' },
-          // Add more images as needed
         ],
       };
     },
