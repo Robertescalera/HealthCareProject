@@ -31,6 +31,7 @@
         <v-window v-model="tab">
           <v-window-item v-for="(item, index) in tabs" :key="index" :value="item.value">
             <v-card flat>
+              <v-card-title class="text-h5">{{ item.title }}</v-card-title>
               <v-card-text>
                 {{ item.content }}
               </v-card-text>
@@ -57,7 +58,7 @@ export default {
     tabs: [
       { title: 'Dashboard', icon: 'mdi-account', value: 'dashboard', content: 'Dashboard Content' },
       { title: 'Analytics', icon: 'mdi-lock', value: 'analytics', content: 'Analytics Content' },
-      { title: 'Census', icon: 'mdi-access-point', value: 'census', content: 'Census Content' },
+      { title: 'Health Records', icon: 'mdi-access-point', value: 'HealthRecords', content: 'Health Records Content' },
       { title: 'Survey', icon: 'mdi-access-point', value: 'survey', content: 'Survey Content' },
     ],
   }),

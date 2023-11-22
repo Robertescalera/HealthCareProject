@@ -1,9 +1,10 @@
 <template>
   <v-container>
     <v-row class="registration-row" justify="end">
-        <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
-        <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
-      </v-row>
+      <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
+      <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
+    </v-row>
+
     <!-- Navigation Drawer -->
     <v-navigation-drawer app temporary v-model="drawer">
       <v-list dense nav>
@@ -55,6 +56,10 @@
           <v-row align="center" justify="center">
             <v-col>
               <!-- Add your services content here -->
+              <h2 class="display-2 text-center white--text">Our Services</h2>
+              <p class="text-center white--text">
+                Describe the healthcare services you provide.
+              </p>
             </v-col>
           </v-row>
         </v-sheet>
@@ -66,6 +71,25 @@
           <v-row align="center" justify="center">
             <v-col>
               <!-- Add your contact content here -->
+              <h2 class="display-2 text-center white--text">Contact Us</h2>
+              <p class="text-center white--text">
+                Provide contact information and how to reach your healthcare center.
+              </p>
+            </v-col>
+          </v-row>
+        </v-sheet>
+      </v-container>
+
+      <!-- Main Content Section -->
+      <v-container fluid>
+        <v-sheet class="background-sheet main-content-section">
+          <v-row align="center" justify="center">
+            <v-col>
+              <!-- Add your main content here -->
+              <h2 class="display-2 text-center white--text">Main Content Section</h2>
+              <p class="text-center white--text">
+                This is the main content section of your page.
+              </p>
             </v-col>
           </v-row>
         </v-sheet>
@@ -121,6 +145,10 @@ export default {
 
 .contact-section {
   height: 40vh; /* Adjust the height for the contact section */
+}
+
+.main-content-section {
+  height: 70vh; /* Adjust the height for the main content section */
 }
 
 /* Responsive Styles */
