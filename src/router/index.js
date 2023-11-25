@@ -7,6 +7,10 @@ import SignIn from '@/views/SignIn.vue';
 import adminpanel from '@/views/adminpanel.vue';
 import residentpanel from '@/views/residentpanel.vue';
 import HealthRecords from '@/views/HealthRecords.vue';
+import header from '@/views/Home.vue';
+import dashboard from '@/views/AdminPanel/dashboard.vue';
+import dash from '@/views/dashboard.vue';
+
 
 const routes = [
   { path: '/', component: Home },
@@ -17,6 +21,9 @@ const routes = [
   { path: '/adminpanel', component: adminpanel },
   { path: '/residentpanel', component: residentpanel },
   { path: '/HealthRecords', component: HealthRecords },
+  { path: '/Home', components: header },
+  { path: '/AdminPanel/dashboard', components: dashboard },
+  { path: '/dashboard', components: dash },
 ];
 
 const router = createRouter({

@@ -20,13 +20,6 @@
   </template>
   
   <script>
-  export default {
-    name: 'Home',
-    methods: {
-      navigateTo(route) {
-        this.$router.push(route);
-      },
-    },
-  };
+ 
   </script>
   

@@ -1,23 +1,7 @@
 <template>
   <v-container>
-    <v-row class="registration-row" justify="end">
-      <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
-      <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
-    </v-row>
-
-    <!-- Navigation Drawer -->
-    <v-navigation-drawer app temporary v-model="drawer">
-      <v-list dense nav>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-list-item prepend-icon="mdi-folder" title="" value="myfiles"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-        <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!-- App Bar -->
+    <!-- Include Header Component -->
     <v-app-bar app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         NAUJAN HEALTH CARE CENTER
       </v-app-bar-title>
@@ -27,9 +11,13 @@
       <v-btn @click="navigateTo('/contact')">Contact</v-btn>
     </v-app-bar>
 
+    <v-row class="registration-row" justify="end">
+      <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
+      <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
+    </v-row>
+
     <!-- Main Content -->
     <v-main>
-
       <!-- Introduction Section -->
       <v-container fluid>
         <v-sheet class="background-sheet intro-section">
@@ -94,7 +82,6 @@
           </v-row>
         </v-sheet>
       </v-container>
-
     </v-main>
 
     <!-- Footer -->
@@ -104,17 +91,39 @@
       </v-container>
     </v-footer>
 
+    <!-- Navigation Drawer -->
+    <v-navigation-drawer app temporary v-model="drawer">
+      <v-list dense nav>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
+          <v-list-item-icon>{{ item.icon }}</v-list-item-icon>
+          <v-list-item-content>{{ item.text }}</v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-container>
 </template>
 
 <script>
+// Import Header Component
+import header from '@/components/Header/header.vue';
+
 export default {
   name: 'Home',
-  data() {
-    return {
-      drawer: false,
-    };
+  components: {
+    // Register Header Component
+    header,
   },
+  data: () => ({
+    drawer: false,
+    tab: 'dashboard',
+    drawerItems: [
+      { title: 'Home', icon: 'mdi-account', route: 'adminpanel' },
+      { title: 'Analytics', icon: 'mdi-lock', route: 'analytics' },
+      { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+      { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+    ],
+  }),
   methods: {
     navigateTo(route) {
       this.$router.push(route);
@@ -132,7 +141,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px; /* Add padding for space around content */
+  padding: 10px; /* Add padding for space around content */
 }
 
 .intro-section {

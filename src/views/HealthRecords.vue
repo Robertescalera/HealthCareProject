@@ -28,13 +28,18 @@
           <v-col v-for="header in headers" :key="header.value" class="text-left header-cell">
             {{ header.text }}
           </v-col>
+          <v-col class="text-center header-cell">Actions</v-col>
         </v-row>
   
         <!-- Table Content -->
         <v-card-text>
           <v-row v-for="item in records" :key="item.name" class="content-row">
-            <v-col v-for="(value, key) in item" :key="key" class="text-left">
+            <v-col v-for="(value, key) in item" :key="key" class="text-left content-cell">
               {{ value }}
+            </v-col>
+            <v-col class="text-center content-cell">
+              <v-icon @click="editRecord(item)">mdi-pencil</v-icon>
+              <v-icon @click="deleteRecord(item)">mdi-delete</v-icon>
             </v-col>
           </v-row>
         </v-card-text>
@@ -64,15 +69,7 @@
           { text: 'Insurance Information', value: 'insuranceInformation' },
         ],
         records: [
-          {
-            name: 'John Doe',
-            dateOfBirth: '01/01/1980',
-            gender: 'Male',
-            contactNumber: '123-456-7890',
-            emergencyContactDetails: 'Emergency Contact Name: Jane Doe, Phone: 987-654-3210',
-            insuranceInformation: 'Insurance Company: ABC Insurance, Policy Number: 123456',
-          },
-          // Add more entries as needed
+          // Your record data here
         ],
         drawerItems: [
           { text: 'Dashboard', icon: '', route: '/adminpanel' },
@@ -86,6 +83,14 @@
       navigateTo(route) {
         this.$router.push(route);
       },
+      editRecord(record) {
+        // Implement logic to handle edit action
+        console.log('Edit record:', record);
+      },
+      deleteRecord(record) {
+        // Implement logic to handle delete action
+        console.log('Delete record:', record);
+      },
     },
   };
   </script>
@@ -93,24 +98,20 @@
   <style scoped>
   /* Add any additional styling as needed */
   .header-row {
-    margin-bottom: 20px; /* Adjust the value to control the spacing */
-  }
-  
-  /* Style for the header cells */
-  .header-cell {
-    font-weight: bold;
+    margin-bottom: 2px; /* Adjust the value to control the spacing */
   }
   
   /* Style for the table content rows */
   .content-row {
-    border-bottom: 1px solid #ccc; /* Add a border between rows for separation */
     padding: 8px 0; /* Adjust the padding as needed */
+    border-bottom: 1px solid #ccc; /* Add a border between rows for separation */
   }
   
-  /* Style for the app bar title */
-  .header-title {
-    font-weight: bold;
-    font-size: 18px; /* Adjust the font size as needed */
+  /* Style for the table content cells */
+  .content-cell {
+    padding: 8px 16px; /* Adjust the padding as needed */
+    display: flex;
+    justify-content: space-around;
   }
   </style>
   
