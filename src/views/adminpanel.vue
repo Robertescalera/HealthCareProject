@@ -104,7 +104,7 @@ export default {
       chart1Visible: false,
       chart2Visible: false,
       drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'dashboard' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
         { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
         { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },

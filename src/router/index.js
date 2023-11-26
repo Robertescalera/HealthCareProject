@@ -12,6 +12,7 @@ import dashboard from '@/views/AdminPanel/dashboard.vue';
 import dash from '@/views/dashboard.vue';
 import analytic from '@/views/analytic.vue';
 import survey from '@/views/survey.vue';
+import inventory from '@/views/inventory.vue';
 
 
 const routes = [
@@ -28,6 +29,7 @@ const routes = [
   { path: '/dashboard', components: dash },
   {  path: '/analytic', component: analytic},
   {  path: '/survey', component: survey},
+  {  path: '/inventory', component: inventory},
 
 ];
 

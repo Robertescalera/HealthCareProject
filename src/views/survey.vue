@@ -1,30 +1,32 @@
 <template>
     <v-container>
-        <v-navigation-drawer app temporary v-model="drawer">
-      <v-list>
-        <v-list-item
-          prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-          title="Lolo mo Admin"
-          subtitle="LOLOmoADMIN@gmailcom"
-        ></v-list-item>
-      </v-list>
-      <v-list dense nav>
-        <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
-          <v-icon>{{ item.icon }}</v-icon>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>
-  ADMIN NAUJAN HEALTH CARE CENTER
-      </v-app-bar-title>
-      <v-spacer></v-spacer>
-      <v-btn @click="navigateTo('/')">Logout</v-btn>
-    </v-app-bar>
+      <!-- Navigation Drawer -->
+      <v-navigation-drawer app temporary v-model="drawer">
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
+            title="Lolo mo Admin"
+            subtitle="LOLOmoADMIN@gmailcom"
+          ></v-list-item>
+        </v-list>
+        <v-list dense nav>
+          <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
+            <v-icon>{{ item.icon }}</v-icon>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
   
+      <!-- App Bar -->
+      <v-app-bar app color="primary">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-title>
+         ADMIN NAUJAN HEALTH CARE CENTER
+        </v-app-bar-title>
+        <v-spacer></v-spacer>
+        <v-btn @click="navigateTo('/')">Logout</v-btn>
+      </v-app-bar>
+    
       <!-- Header -->
       <v-row class="header-row">
         <v-col>
@@ -32,33 +34,28 @@
         </v-col>
       </v-row>
   
-      <!-- Survey Form -->
-      <v-form @submit.prevent="submitSurvey">
-        <!-- Question 1 -->
-        <v-row class="survey-question">
-          <v-col>
-            <h3>Question 1:</h3>
-            <v-text-field v-model="surveyData.question1" label="Enter your answer" required></v-text-field>
-          </v-col>
-        </v-row>
-  
-        <!-- Question 2 -->
-        <v-row class="survey-question">
-          <v-col>
-            <h3>Question 2:</h3>
-            <v-textarea v-model="surveyData.question2" label="Enter your answer" required></v-textarea>
-          </v-col>
-        </v-row>
-  
-        <!-- Add more questions as needed -->
-  
-        <!-- Submit Button -->
-        <v-row class="submit-row">
-          <v-col>
-            <v-btn type="submit" color="primary">Submit</v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
+      <!-- Survey Responses Table -->
+      <v-card>
+        <v-card-title>Survey Responses</v-card-title>
+        <v-card-text>
+          <div class="table-responsive"> <!-- Bootstrap class for responsive tables -->
+            <table class="table table-bordered table-striped"> <!-- Bootstrap classes for table styling -->
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(value, key) in surveyData" :key="key">
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </v-card-text>
+      </v-card>
     </v-container>
   </template>
   
@@ -67,6 +64,16 @@
     name: 'SurveyPage',
     data() {
       return {
+        drawer: false,
+        drawerItems: [
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
+        ],
         surveyData: {
           question1: '',
           question2: '',
@@ -77,7 +84,8 @@
     methods: {
       submitSurvey() {
         // Logic to submit the survey data
-        // You can send the surveyData to your backend or perform any necessary actions
+        // Display the submitted survey data in the table
+        // Survey data is already stored in the surveyData object
         console.log('Survey Data:', this.surveyData);
         // Optionally, reset the form after submission
         this.resetForm();
@@ -89,6 +97,10 @@
           question2: '',
           // Reset other fields as needed
         };
+      },
+      navigateTo(route) {
+        this.$router.push(route);
+        this.drawer = false;
       }
     }
   };
@@ -98,15 +110,8 @@
   /* Add any additional styling as needed */
   .header-row {
     margin-bottom: 20px;
-  }
-  
-  .survey-question {
-    margin-bottom: 20px;
-  }
-  
-  .submit-row {
-    text-align: center;
-    margin-top: 20px;
+    text-align: right;
+    font-size: 10px;
   }
   </style>
   
