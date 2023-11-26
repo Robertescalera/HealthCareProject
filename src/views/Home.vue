@@ -9,6 +9,7 @@
       <v-btn @click="navigateTo('/')">Home</v-btn>
       <v-btn @click="navigateTo('/About')">About</v-btn>
       <v-btn @click="navigateTo('/contact')">Contact</v-btn>
+
       <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
     </v-app-bar>
 
@@ -161,5 +162,9 @@ export default {
   .background-sheet {
     background-size: contain;
   }
+}
+
+.registration-btn {
+  border: 1px solid #ffffff; /* Change color and thickness as needed */
 }
 </style>

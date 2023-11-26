@@ -71,9 +71,9 @@ export default {
         { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
         { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Inventory', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
       medications: [
         { name: 'Medication A', quantity: 50, expiry: '2023-12-31' },
