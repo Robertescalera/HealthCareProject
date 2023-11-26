@@ -2,6 +2,13 @@
   <v-container>
 
     <v-navigation-drawer app temporary v-model="drawer">
+      <v-list>
+        <v-list-item
+          prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
+          title="Lolo mo Admin"
+          subtitle="LOLOmoADMIN@gmailcom"
+        ></v-list-item>
+      </v-list>
       <v-list dense nav>
         <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
           <v-icon>{{ item.icon }}</v-icon>
@@ -19,11 +26,21 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
-   
-
-    <!-- Add the first chart here -->
+    <!-- Button to toggle the visibility of charts -->
     <v-main>
       <v-container>
+        <v-row>
+          <v-col>
+            <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Toggle Chart 1</v-btn>
+            <v-btn @click="toggleChartVisibility('chart2', chart2Visible)">Toggle Chart 2</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <!-- Chart 1 -->
+    <v-main>
+      <v-container v-if="chart1Visible">
         <v-row>
           <v-col>
             <canvas id="chart1"></canvas>
@@ -32,9 +49,9 @@
       </v-container>
     </v-main>
 
-    <!-- Add the second chart here -->
+    <!-- Chart 2 -->
     <v-main>
-      <v-container>
+      <v-container v-if="chart2Visible">
         <v-row>
           <v-col>
             <canvas id="chart2"></canvas>
@@ -43,18 +60,7 @@
       </v-container>
     </v-main>
 
-    <!-- Add the existing chart here -->
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col>
-            <canvas id="myChart"></canvas>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
   </v-container>
-  
 </template>
 
 <script>
@@ -62,63 +68,27 @@ import Chart from 'chart.js/auto';
 
 export default {
   name: 'Dashboard',
-  data: () => ({
-    drawer: false,
-    tab: 'dashboard',
-    drawerItems: [
-      { title: 'Dashboard', icon: 'mdi-account', route: 'dashboard' },
-      { title: 'Analytics', icon: 'mdi-lock', route: 'analytics' },
-      { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-      { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-    ],
-  }),
+  data() {
+    return {
+      drawer: false,
+      chart1Visible: false,
+      chart2Visible: false,
+      drawerItems: [
+        { title: 'Dashboard', icon: 'mdi-account', route: 'dashboard' },
+        { title: 'Analytics', icon: 'mdi-lock', route: 'analytics' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
+      ],
+    };
+  },
   methods: {
     navigateTo(route) {
       this.$router.push(route);
       this.drawer = false;
     },
-    createCharts() {
-      // Chart data and options for the first chart
-      const data1 = {
-        labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'],
-        datasets: [
-          {
-            label: 'Chart 1',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            data: [65, 59, 80, 81, 56],
-          },
-        ],
-      };
-
-      // Chart data and options for the second chart
-      const data2 = {
-        labels: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
-        datasets: [
-          {
-            label: 'Chart 2',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            data: [30, 45, 75, 60, 90],
-          },
-        ],
-      };
-
-      const data = {
-        labels: ['Category X', 'Category Y', 'Category Z', 'Category W', 'Category V'],
-        datasets: [
-          {
-            label: 'Existing Chart',
-            backgroundColor: 'rgba(255, 205, 86, 0.2)',
-            borderColor: 'rgba(255, 205, 86, 1)',
-            borderWidth: 1,
-            data: [50, 70, 40, 55, 65],
-          },
-        ],
-      };
-
+    createCharts(chartId, data) {
       const options = {
         scales: {
           y: {
@@ -129,28 +99,72 @@ export default {
 
       // Use $nextTick to ensure the DOM is updated
       this.$nextTick(() => {
-        // Create the first chart
-        const ctx1 = document.getElementById('chart1').getContext('2d');
-        new Chart(ctx1, {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
           type: 'bar',
-          data: data1,
+          data: data,
           options: options,
         });
-
-        // Create the second chart
-        const ctx2 = document.getElementById('chart2').getContext('2d');
-        new Chart(ctx2, {
-          type: 'bar',
-          data: data2,
-          options: options,
-        });
-
       });
+    },
+    toggleChartVisibility(chartId, isVisible) {
+      this[`${chartId}Visible`] = !isVisible;
+      if (this[`${chartId}Visible`]) {
+        this.createCharts(chartId, this.getChartData(chartId));
+      }
+    },
+    getChartData(chartId) {
+      if (chartId === 'chart1') {
+        // Sample barangay data (replace with your actual data)
+        const barangays = [
+          { name: 'Poblacion I', value: 25 },
+          { name: 'General Esco', value: 49 },
+          // Add more barangay data here...
+        ];
+
+        // Extract barangay names and values for the chart
+        const labels = barangays.map((barangay) => barangay.name);
+        const dataValues = barangays.map((barangay) => barangay.value);
+
+        return {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Barangay Data',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1,
+              data: dataValues,
+            },
+          ],
+        };
+      } else if (chartId === 'chart2') {
+        // Sample data for a different chart (if needed)
+        // Modify this section according to your chart data requirements
+        return {
+          labels: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
+          datasets: [
+            {
+              label: 'Chart 2',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1,
+              data: [30, 45, 75, 60, 90],
+            },
+          ],
+        };
+      }
+
+      return null;
     },
   },
   mounted() {
-    // Create the charts when the component is mounted
-    this.createCharts();
+    // Create the first chart with barangay data when the component is mounted
+    this.createCharts('chart1', this.getChartData('chart1'));
   },
 };
 </script>
+
+<style scoped>
+/* Add any scoped styles if needed */
+</style>
