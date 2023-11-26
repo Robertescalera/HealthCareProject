@@ -9,12 +9,8 @@
       <v-btn @click="navigateTo('/')">Home</v-btn>
       <v-btn @click="navigateTo('/About')">About</v-btn>
       <v-btn @click="navigateTo('/contact')">Contact</v-btn>
-    </v-app-bar>
-
-    <v-row class="registration-row" justify="end">
-      <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
       <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
-    </v-row>
+    </v-app-bar>
 
     <!-- Main Content -->
     <v-main>

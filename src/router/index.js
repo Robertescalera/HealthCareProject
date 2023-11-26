@@ -11,6 +11,7 @@ import header from '@/views/Home.vue';
 import dashboard from '@/views/AdminPanel/dashboard.vue';
 import dash from '@/views/dashboard.vue';
 import analytic from '@/views/analytic.vue';
+import survey from '@/views/survey.vue';
 
 
 const routes = [
@@ -26,6 +27,8 @@ const routes = [
   { path: '/AdminPanel/dashboard', components: dashboard },
   { path: '/dashboard', components: dash },
   {  path: '/analytic', component: analytic},
+  {  path: '/survey', component: survey},
+
 ];
 
 const router = createRouter({
