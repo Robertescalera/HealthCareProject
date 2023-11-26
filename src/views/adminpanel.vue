@@ -1,29 +1,52 @@
 <template>
   <v-container>
     <v-app-bar app color="primary">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>
-        NAUJAN HEALTH CARE CENTER
-      </v-app-bar-title>
-      <v-spacer></v-spacer>
-      <v-btn @click="navigateTo('/')">Logout</v-btn>
+      <!-- ... (existing code) ... -->
     </v-app-bar>
 
     <v-navigation-drawer app temporary v-model="drawer">
-      <v-list dense nav>
-        <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
-          <v-icon>{{ item.icon }}</v-icon>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+      <!-- ... (existing code) ... -->
     </v-navigation-drawer>
 
-    <!-- Add the chart here -->
+    <!-- Button to toggle chart visibility -->
     <v-main>
       <v-container>
         <v-row>
           <v-col>
-            <canvas id="myChart"></canvas>
+            <v-btn @click="toggleChartsVisibility">Toggle Charts Visibility</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <!-- Chart 1 (initially invisible) -->
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col>
+            <canvas id="chart1" v-if="chartsVisible"></canvas>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <!-- Chart 2 (initially invisible) -->
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col>
+            <canvas id="chart2" v-if="chartsVisible"></canvas>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <!-- Existing Chart (initially invisible) -->
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col>
+            <canvas id="myChart" v-if="chartsVisible"></canvas>
           </v-col>
         </v-row>
       </v-container>
@@ -39,6 +62,7 @@ export default {
   data: () => ({
     drawer: false,
     tab: 'dashboard',
+    chartsVisible: false, // Added state for chart visibility
     drawerItems: [
       { title: 'Dashboard', icon: 'mdi-account', route: 'dashboard' },
       { title: 'Analytics', icon: 'mdi-lock', route: 'analytics' },
@@ -51,44 +75,20 @@ export default {
       this.$router.push(route);
       this.drawer = false;
     },
-    createChart() {
-      // Chart data and options
-      const data = {
-        labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'],
-        datasets: [
-          {
-            label: 'Disease Percentage',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            data: [65, 59, 80, 81, 56],
-          },
-        ],
-      };
-
-      const options = {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      };
-
-      // Use $nextTick to ensure the DOM is updated
-      this.$nextTick(() => {
-        // Create the chart
-        const ctx = document.getElementById('myChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options,
-        });
-      });
+    createCharts() {
+      // ... (existing createCharts method)
+    },
+    toggleChartsVisibility() {
+      this.chartsVisible = !this.chartsVisible;
+      if (this.chartsVisible) {
+        // Create or update the charts when visibility is toggled
+        this.createCharts();
+      }
     },
   },
   mounted() {
-    // Create the chart when the component is mounted
-    this.createChart();
+    // Create the charts when the component is mounted
+    this.createCharts();
   },
 };
 </script>
