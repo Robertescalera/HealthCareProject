@@ -8,8 +8,7 @@
             title="Lolo mo Admin"
             subtitle="LOLOmoADMIN@gmailcom"
           ></v-list-item>
-        </v-list>
-        <v-list dense nav>
+          <v-divider></v-divider>
           <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
             <v-icon>{{ item.icon }}</v-icon>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -20,9 +19,7 @@
       <!-- App Bar -->
       <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-app-bar-title>
-         ADMIN NAUJAN HEALTH CARE CENTER
-        </v-app-bar-title>
+        <v-app-bar-title>ADMIN NAUJAN HEALTH CARE CENTER</v-app-bar-title>
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
@@ -30,30 +27,20 @@
       <!-- Header -->
       <v-row class="header-row">
         <v-col>
-          <h1>SURVEY</h1>
+          <h1 class="text-h5">SURVEY</h1>
         </v-col>
       </v-row>
   
       <!-- Survey Responses Table -->
       <v-card>
-        <v-card-title>Survey Responses</v-card-title>
+        <v-card-title class="headline">Survey Responses</v-card-title>
         <v-card-text>
-          <div class="table-responsive"> <!-- Bootstrap class for responsive tables -->
-            <table class="table table-bordered table-striped"> <!-- Bootstrap classes for table styling -->
-              <thead>
-                <tr>
-                  <th>Question</th>
-                  <th>Answer</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(value, key) in surveyData" :key="key">
-                  <td>{{ key }}</td>
-                  <td>{{ value }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <v-data-table
+            :headers="headers"
+            :items="formattedSurveyData"
+            :items-per-page="10"
+            class="elevation-1"
+          ></v-data-table>
         </v-card-text>
       </v-card>
     </v-container>
@@ -66,20 +53,34 @@
       return {
         drawer: false,
         drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
-        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
+          { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+          { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+          { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+          { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+          { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+          { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
         ],
         surveyData: {
           question1: '',
           question2: '',
           // Add more fields for other questions as needed
-        }
+        },
       };
+    },
+    computed: {
+      headers() {
+        return [
+          { text: 'Question', value: 'question' },
+          { text: 'Answer', value: 'answer' },
+        ];
+      },
+      formattedSurveyData() {
+        return Object.keys(this.surveyData).map(key => ({
+          question: key,
+          answer: this.surveyData[key],
+        }));
+      },
     },
     methods: {
       submitSurvey() {
@@ -101,17 +102,18 @@
       navigateTo(route) {
         this.$router.push(route);
         this.drawer = false;
-      }
-    }
+      },
+    },
   };
   </script>
   
   <style scoped>
-  /* Add any additional styling as needed */
   .header-row {
     margin-bottom: 20px;
-    text-align: right;
-    font-size: 10px;
+  }
+  .text-h5 {
+    font-size: 24px;
+    margin: 0;
   }
   </style>
   

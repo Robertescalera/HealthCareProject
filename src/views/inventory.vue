@@ -100,8 +100,9 @@ export default {
 <style scoped>
 /* Add any additional styling as needed */
 .header-row {
-  margin-bottom: 20px;
-  text-align: center;
+    margin-bottom: 20px;
+    text-align: right;
+    font-size: 10px;
 }
 
 .table-responsive {

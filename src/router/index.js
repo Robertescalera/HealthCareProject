@@ -13,6 +13,8 @@ import dash from '@/views/dashboard.vue';
 import analytic from '@/views/analytic.vue';
 import survey from '@/views/survey.vue';
 import inventory from '@/views/inventory.vue';
+import barangay from '@/views/barangay.vue';
+import announcement from '@/views/announcement.vue';
 
 
 const routes = [
@@ -30,6 +32,8 @@ const routes = [
   {  path: '/analytic', component: analytic},
   {  path: '/survey', component: survey},
   {  path: '/inventory', component: inventory},
+  {  path: '/barangay', component: barangay},
+  {  path: '/announcement', component: announcement},
 
 ];
 

@@ -110,7 +110,7 @@ export default {
         { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
         { title: 'Inventory', icon: 'mdi-access-point', route: 'survey' },
         { title: 'Barangay', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
     };
   },
