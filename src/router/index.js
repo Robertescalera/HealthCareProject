@@ -10,6 +10,7 @@ import HealthRecords from '@/views/HealthRecords.vue';
 import header from '@/views/Home.vue';
 import dashboard from '@/views/AdminPanel/dashboard.vue';
 import dash from '@/views/dashboard.vue';
+import analytic from '@/views/analytic.vue';
 
 
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
   { path: '/Home', components: header },
   { path: '/AdminPanel/dashboard', components: dashboard },
   { path: '/dashboard', components: dash },
+  {  path: '/analytic', component: analytic},
 ];
 
 const router = createRouter({

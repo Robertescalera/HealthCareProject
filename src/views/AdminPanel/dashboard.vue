@@ -2,14 +2,7 @@
     <v-container>
      
 
-      <v-app-bar app color="primary">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-app-bar-title>
-          NAUJAN HEALTH CARE CENTER
-        </v-app-bar-title>
-        <v-spacer></v-spacer>
-        <v-btn @click="navigateTo('/')">Logout</v-btn>
-      </v-app-bar>
+  
     </v-container>
 
     <v-navigation-drawer app temporary v-model="drawer">

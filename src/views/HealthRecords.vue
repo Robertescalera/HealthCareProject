@@ -72,10 +72,13 @@
           // Your record data here
         ],
         drawerItems: [
-          { text: 'Dashboard', icon: '', route: '/adminpanel' },
-          { text: 'Analytics', icon: '', route: '/analytics' },
-          { text: 'Census', icon: '', route: '/census' },
-          { text: 'Survey', icon: '', route: '/survey' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'dashboard' },
+        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
         ],
       };
     },
