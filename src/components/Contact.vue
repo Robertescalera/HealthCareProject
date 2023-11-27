@@ -5,8 +5,7 @@
       <v-app-bar-title>
         NAUJAN HEALTH CARE CENTER
       </v-app-bar-title>
-
-      <!-- Right-aligned buttons -->
+      
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Home</v-btn>
       <v-btn @click="navigateTo('/about')">About</v-btn>

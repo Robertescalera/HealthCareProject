@@ -12,7 +12,6 @@
       <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
     </v-app-bar>
 
-    <!-- Main Content -->
     <v-main class="main-content">
       <!-- Introduction Section -->
       <v-container fluid>
