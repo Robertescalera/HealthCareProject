@@ -1,12 +1,8 @@
 <template>
     <v-container fluid>
-      <v-row class="registration-row" justify="end">
-        <v-btn @click="navigateTo('/register')" class="registration-btn">Register</v-btn>
-        <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
-      </v-row>
+     
   
       <v-app-bar app color="primary">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-app-bar-title>
           NAUJAN HEALTH CARE CENTER
         </v-app-bar-title>
@@ -15,6 +11,7 @@
         <v-btn @click="navigateTo('/')">Home</v-btn>
         <v-btn @click="navigateTo('/About')">About</v-btn>
         <v-btn @click="navigateTo('/contact')">Contact</v-btn>
+        <v-btn @click="navigateTo('/signin')" class="registration-btn">Sign In</v-btn>
       </v-app-bar>
   
       <div>
@@ -59,4 +56,10 @@
     },
   };
   </script>
+
+  <style scoped>
+  .registration-btn {
+    border: 1px solid white;
+  }
+  </style>
   
