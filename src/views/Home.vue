@@ -3,7 +3,7 @@
     <!-- Include Header Component -->
     <v-app-bar app color="primary">
       <v-app-bar-title class="text-styled">
-      NAUJAN HEALTH CARE CENTER
+      NAUJAN HEALTH CARE CENTER 
     </v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Home</v-btn>
