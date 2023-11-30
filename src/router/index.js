@@ -13,6 +13,7 @@ import survey from '../views/survey.vue';
 import inventory from '../views/inventory.vue';
 import barangay from '../views/barangay.vue';
 import announcement from '../views/announcement.vue';
+import UserHealthRecord from '../views/UserHealthRecord.vue';
 
 
 const routes = [
@@ -30,6 +31,7 @@ const routes = [
   {  path: '/inventory',name: 'inventory', component: inventory},
   {  path: '/barangay', name: 'barangay', component: barangay},
   {  path: '/announcement', name: 'announcement', component: announcement},
+  {  path: '/UserHealthRecord', name: 'announcement', component: UserHealthRecord},
 ];
 
 const router = createRouter({

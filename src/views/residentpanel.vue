@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    
     <v-row class="header-row">
       <v-col class="text-right">
         <h1>USER DASHBOARD</h1>
@@ -26,71 +25,28 @@
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
-   WELCOME TO NAUJAN HEALTH CARE CENTER
+        WELCOME TO NAUJAN HEALTH CARE CENTER
       </v-app-bar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="navigateTo('/')" class="logout">Logout</v-btn>
+      <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
     <v-main>
       <v-container>
-        <!-- Move the buttons to the top-left corner -->
-        <v-row class="top-left-buttons">
-          <v-col>
-            <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Municipality</v-btn>
-            <v-btn @click="toggleChartVisibility('chart2', chart2Visible)">Municipality</v-btn>
-          </v-col>
+        <!-- Toggle Button to Show/Hide Chart -->
+        <v-row class="toggle-chart">
+          <v-btn @click="toggleChartVisibility">Toggle Chart</v-btn>
         </v-row>
-      </v-container>
-    </v-main>
 
-    <v-row>
-      <v-col cols="12" md="6" class="mb-4">
-        <v-card>
-          <v-card-title>Card 1</v-card-title>
-          <v-card-text>
-            <p>Survey: 75%</p>
-            <p>Census: 25%</p>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="6" class="mb-4">
-        <v-card>
-          <v-card-title>Card 2</v-card-title>
-          <v-card-text>
-            <p>Survey: 60%</p>
-            <p>Census: 40%</p>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <!-- Chart 1 -->
-    <v-main>
-      <v-container v-if="chart1Visible">
-        <v-row>
+        <!-- Bar Chart -->
+        <v-row v-if="chartVisible">
           <v-col>
-            <canvas id="chart1"></canvas>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-
-    <!-- Chart 2 -->
-    <v-main>
-      <v-container v-if="chart2Visible">
-        <v-row>
-          <v-col>
-            <canvas id="chart2"></canvas>
+            <canvas id="barChart" ref="barChart"></canvas>
           </v-col>
         </v-row>
       </v-container>
     </v-main>
   </v-container>
-
-  
-
 </template>
 
 <script>
@@ -101,112 +57,78 @@ export default {
   data() {
     return {
       drawer: false,
-      chart1Visible: false,
-      chart2Visible: false,
       drawerItems: [
-         { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
-          { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-          { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-          { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-          { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
-          { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
+      chartVisible: false,
+      barChart: null,
     };
   },
   methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-      this.drawer = false;
-    },
-    createChart(chartId, data) {
-      const options = {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      };
-
-      this.$nextTick(() => {
-        const ctx = document.getElementById(chartId);
-        if (ctx) {
-          const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options,
-          });
-        }
-      });
-    },
-    toggleChartVisibility(chartId, isVisible) {
-      this[`${chartId}Visible`] = !isVisible;
-
-      if (this[`${chartId}Visible`]) {
-        this.createChart(chartId, this.getChartData(chartId));
+    createBarChart() {
+      if (this.barChart) {
+        this.barChart.destroy();
       }
-    },
-    getChartData(chartId) {
-      if (chartId === 'chart1') {
-        return {
-          labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-          datasets: [
-            {
-              label: 'Chart 1 Data',
+
+      const ctx = this.$refs.barChart;
+
+      if (ctx) {
+        this.barChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+            datasets: [{
+              label: 'Sample Data',
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
               data: [65, 59, 80, 81, 56],
+            }],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
             },
-          ],
-        };
-      } else if (chartId === 'chart2') {
-        return {
-          labels: ['Label A', 'Label B', 'Label C', 'Label D', 'Label E'],
-          datasets: [
-            {
-              label: 'Chart 2 Data',
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1,
-              data: [30, 45, 75, 60, 90],
-            },
-          ],
-        };
+          },
+        });
       }
+    },
+    toggleChartVisibility() {
+      this.chartVisible = !this.chartVisible;
 
-      return null;
+      if (this.chartVisible) {
+        this.$nextTick(() => {
+          this.createBarChart();
+        });
+      } else {
+        if (this.barChart) {
+          this.barChart.destroy();
+          this.barChart = null;
+        }
+      }
+    },
+    navigateTo(route) {
+      this.$router.push(route);
+      this.drawer = false;
     },
   },
   mounted() {
-    this.createChart('chart1', this.getChartData('chart1'));
-    this.createChart('chart2', this.getChartData('chart2'));
+    // Optionally, you can render the chart initially if needed
+    // this.createBarChart();
   },
 };
 </script>
 
 <style scoped>
-.top-left-buttons {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-.mb-4 {
-  margin-bottom: 20px; /* You can adjust the margin as needed */
-}
-
-.header-row {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-.text-right {
-  text-align: right;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.logout {
-  border: 1px solid white;
+.toggle-chart {
+  margin-bottom: 20px;
 }
 </style>
