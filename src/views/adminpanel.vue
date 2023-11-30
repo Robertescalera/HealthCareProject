@@ -1,12 +1,5 @@
 <template>
   <v-container>
-    
-    <v-row class="header-row">
-      <v-col class="text-right">
-        <h1>ADMIN DASHBOARD</h1>
-      </v-col>
-    </v-row>
-
     <v-navigation-drawer app temporary v-model="drawer">
       <v-list>
         <v-list-item
@@ -32,17 +25,13 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
-    <v-main>
-      <v-container>
-        <!-- Move the buttons to the top-left corner -->
-        <v-row class="top-left-buttons">
-          <v-col>
-            <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Toggle Chart 1</v-btn>
-            <v-btn @click="toggleChartVisibility('chart2', chart2Visible)">Toggle Chart 2</v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
+    
+
+    <v-row class="header-row">
+      <v-col class="text-right">
+        <h1>ADMIN DASHBOARD</h1>
+      </v-col>
+    </v-row>
 
     <v-row>
       <v-col cols="12" md="6" class="mb-4">
@@ -65,6 +54,18 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-main>
+      <v-container>
+        <!-- Move the buttons to the top-left corner -->
+        <v-row class="top-left-buttons">
+          <v-col>
+            <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Toggle Chart 1</v-btn>
+            <v-btn @click="toggleChartVisibility('chart2', chart2Visible)">Toggle Chart 2</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
 
     <!-- Chart 1 -->
     <v-main>
@@ -104,13 +105,13 @@ export default {
       chart1Visible: false,
       chart2Visible: false,
       drawerItems: [
-         { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
-          { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-          { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-          { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-          { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
-          { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
     };
   },
@@ -129,13 +130,17 @@ export default {
       };
 
       this.$nextTick(() => {
-        const ctx = document.getElementById(chartId);
-        if (ctx) {
-          const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options,
-          });
+        try {
+          const ctx = document.getElementById(chartId);
+          if (ctx) {
+            const myChart = new Chart(ctx, {
+              type: 'bar',
+              data: data,
+              options: options,
+            });
+          }
+        } catch (error) {
+          console.error('Error creating chart:', error);
         }
       });
     },
@@ -143,7 +148,12 @@ export default {
       this[`${chartId}Visible`] = !isVisible;
 
       if (this[`${chartId}Visible`]) {
-        this.createChart(chartId, this.getChartData(chartId));
+        const chartData = this.getChartData(chartId);
+        if (chartData) {
+          this.createChart(chartId, chartData);
+        } else {
+          console.error(`No data found for ${chartId}`);
+        }
       }
     },
     getChartData(chartId) {
@@ -184,6 +194,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .top-left-buttons {

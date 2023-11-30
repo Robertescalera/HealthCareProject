@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <!-- Include Header Component -->
     <v-app-bar app color="primary">
       <v-app-bar-title class="text-styled">
       NAUJAN HEALTH CARE CENTER 
@@ -13,7 +12,6 @@
     </v-app-bar>
 
     <v-main class="main-content">
-      <!-- Introduction Section -->
       <v-container fluid>
         <v-sheet class="background-sheet intro-section" :style="{ backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20210923/pngtree-health-care-gradient-blue-theme-light-effect-background-image_904155.png)' }">
           <v-row align="center" justify="center" class="fill-height">
@@ -33,7 +31,6 @@
         </v-sheet>
       </v-container>
 
-      <!-- Services Section -->
       <v-container fluid>
         <v-sheet class="background-sheet services-section" :style="{ backgroundImage: 'url()' }">
           <v-row align="center" justify="center" class="fill-height">
@@ -47,7 +44,6 @@
         </v-sheet>
       </v-container>
 
-      <!-- Contact Section -->
       <v-container fluid>
         <v-sheet class="background-sheet contact-section" :style="{ backgroundImage: 'url()' }">
           <v-row align="center" justify="center" class="fill-height">
@@ -90,15 +86,10 @@
 </template>
 
 <script>
-// Import Header Component
-import header from '@/components/Header/header.vue';
 
 export default {
   name: 'Home',
-  components: {
-    // Register Header Component
-    header,
-  },
+ 
   data: () => ({
     drawer: false,
     tab: 'dashboard',

@@ -46,25 +46,15 @@ export default {
     };
   },
   methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
-    loginUser() {
-      axios.post('http://localhost:8080/UserController/user/login', this.userLogin)
-        .then(response => {
-          console.log('Response from API:', response); // Log the entire response
-          console.log('User logged in:', response.data);
-          if (response.data.success) {
-            this.$router.push('/residentpanel');
-          } else {
-            console.log('Login unsuccessful:', response.data.message); // Log any error message from the API
-            // You can show an error message to the user
-          }
-        })
-        .catch(error => {
-          console.error('Error logging in:', error);
-          // Handle login error
-        });
+    async loginUser() {
+      try {
+        const response = await axios.post('http://localhost:8080/signIn', this.userLogin);
+        // Handle successful sign-in response, e.g., store user data, navigate to home, etc.
+        console.log('User signed in:', response.data);
+      } catch (error) {
+        // Handle sign-in error, e.g., show error message
+        console.error('Sign-in failed:', error.response.data.message);
+      }
     },
   },
 };
