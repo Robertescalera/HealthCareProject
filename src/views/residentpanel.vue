@@ -25,7 +25,7 @@
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
-        WELCOME TO NAUJAN HEALTH CARE CENTER
+        WELCOME to NAUJAN HEALTH CARE CENTER
       </v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Logout</v-btn>
@@ -58,12 +58,11 @@ export default {
     return {
       drawer: false,
       drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
-        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+        { title: 'Appointment', icon: 'mdi-access-point', route: 'Appointment' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'UserInventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
         { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
       chartVisible: false,

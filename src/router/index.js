@@ -13,25 +13,32 @@ import survey from '../views/survey.vue';
 import inventory from '../views/inventory.vue';
 import barangay from '../views/barangay.vue';
 import announcement from '../views/announcement.vue';
-import UserHealthRecord from '../views/UserHealthRecord.vue';
-
+import Appointment from '../views/Appointment.vue';
+import UserSurvey from '../views/UserSurvey.vue';
+import UserInventory from '../views/UserInventory.vue';
+import UserBarangay from '../views/UserBarangay.vue';
+import UserAnnouncement from '../views/UserAnnouncement.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/about', name: 'about', component: About },
-  { path: '/contact', name: 'contact', component: Contact },
-  { path: '/register', name: 'register', component: Register },
-  { path: '/signin', name: 'signin', component: SignIn },
-  { path: '/adminpanel', name: 'adminpanel', component: adminpanel },
-  { path: '/residentpanel', name: 'residentpanel', component: residentpanel },
-  { path: '/HealthRecords', name: 'HealthRecord', component: HealthRecords },
-  { path: '/dashboard', name: 'dashboard', components: dash },
-  {  path: '/analytic', name: 'analytic', component: analytic},
-  {  path: '/survey', name: 'survey', component: survey},
-  {  path: '/inventory',name: 'inventory', component: inventory},
-  {  path: '/barangay', name: 'barangay', component: barangay},
-  {  path: '/announcement', name: 'announcement', component: announcement},
-  {  path: '/UserHealthRecord', name: 'announcement', component: UserHealthRecord},
+  { path: '/about', name: 'About', component: About },
+  { path: '/contact', name: 'Contact', component: Contact },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/signin', name: 'SignIn', component: SignIn },
+  { path: '/adminpanel', name: 'AdminPanel', component: adminpanel },
+  { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel },
+  { path: '/HealthRecords', name: 'HealthRecords', component: HealthRecords },
+  { path: '/dashboard', name: 'Dashboard', component: dash },
+  { path: '/analytic', name: 'Analytic', component: analytic },
+  { path: '/survey', name: 'Survey', component: survey },
+  { path: '/inventory', name: 'Inventory', component: inventory },
+  { path: '/barangay', name: 'Barangay', component: barangay },
+  { path: '/announcement', name: 'Announcement', component: announcement },
+  { path: '/Appointment', name: 'Appointment', component: Appointment },
+  { path: '/UserSurvey', name: 'UserSurvey', component: UserSurvey },
+  { path: '/UserInventory', name: 'UserInventory', component: UserInventory },
+  { path: '/UserBarangay', name: 'UserBarangay', component: UserBarangay },
+  { path: '/UserAnnouncement', name: 'UserAnnouncement', component: UserAnnouncement },
 ];
 
 const router = createRouter({

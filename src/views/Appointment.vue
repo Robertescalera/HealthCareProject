@@ -2,7 +2,7 @@
     <v-container>
       <v-row class="header-row">
         <v-col class="text-right">
-          <h1 class="display-2">HEALTH CARE RECORD</h1>
+          <h1 class="display-2">USER APPOINTMENT</h1>
         </v-col>
       </v-row>
   
@@ -11,8 +11,8 @@
         <v-list>
           <v-list-item
             prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-            title="Lolo mo Admin"
-            subtitle="LOLOmoADMIN@gmailcom"
+            title="Lolo mo User"
+            subtitle="LOLOmoUser@gmailcom"
           ></v-list-item>
           <v-list dense nav>
             <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
@@ -77,13 +77,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-  
-      <!-- Footer -->
-      <v-footer app color="primary">
-        <v-container>
-          <span>&copy; 2023 Naujan Health Care Center. All rights reserved.</span>
-        </v-container>
-      </v-footer>
     </v-container>
   </template>
   
@@ -137,13 +130,12 @@
           // Additional records...
         ],
         drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
-          { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-          { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-          { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-          { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
-          { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+        { title: 'Appointment', icon: 'mdi-access-point', route: 'Appointment' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'UserInventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
         ],
         editDialog: false,
         editedRecord: {}, // Store the record being edited
