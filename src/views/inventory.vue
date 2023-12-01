@@ -108,9 +108,9 @@ export default {
       isEdit: false,
       valid: false,
       editedMedication: {
-        MedicationName: '',
-        Quantity: '',
-        ExpiryData: '',
+        Medicationame: '',
+        quantity: '',
+        expiry: '',
       },
     };
   },
@@ -139,7 +139,7 @@ export default {
     },
     showAddForm() {
       this.isEdit = false;
-      this.editedMedication = { MedicationName: '', Quantity: '', ExpiryData: '' };
+      this.editedMedication = { name: '', quantity: '', expiry: '' };
       this.dialog = true;
     },
     saveMedication() {

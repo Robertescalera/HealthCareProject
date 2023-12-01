@@ -15,7 +15,7 @@
             Sign-In
           </v-card-title>
           <v-card-text>
-            <v-form @submit.prevent="loginUser">
+            <v-form @submit.prevent="login">
               <v-text-field v-model="userLogin.email" label="Email" type="email" required outlined></v-text-field>
               <v-text-field v-model="userLogin.password" label="Password" type="password" required outlined></v-text-field>
               <v-btn color="primary" block type="submit">Sign In</v-btn>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import router from '@/router'; // Assuming your router setup is in the specified location
 
 export default {
   name: 'SignIn',
@@ -46,17 +47,22 @@ export default {
     };
   },
   methods: {
-    async loginUser() {
-      try {
-        const response = await axios.post('http://localhost:8080/signIn', this.userLogin);
-        // Handle successful sign-in response, e.g., store user data, navigate to home, etc.
-        console.log('User signed in:', response.data);
-      } catch (error) {
-        // Handle sign-in error, e.g., show error message
-        console.error('Sign-in failed:', error.response.data.message);
+    async login() {
+      const d = await axios.post("api/SignIn", {
+        email: this.userLogin.email,
+        password: this.userLogin.password
+      });
+      if (d.data.msg === 'okay') {
+        sessionStorage.setItem("token", d.data.token);
+        // Assuming 'router' is imported and available in this component
+        router.push('/residentpanel');
       }
     },
-  },
+    navigateTo(route) {
+      this.$router.push(route);
+      this.drawer = false;
+    }
+  }
 };
 </script>
 
@@ -65,4 +71,5 @@ export default {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+/* Your additional styles go here */
 </style>

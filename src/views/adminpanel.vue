@@ -19,7 +19,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- App Bar -->
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
@@ -28,6 +27,8 @@
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
+
+
 
     <!-- Header Row -->
     <v-row class="header-row">
@@ -250,7 +251,7 @@ export default {
   position: absolute;
   top: 50px;
   left: 20px;
-  bottom: 20px;
+  bottom: 60px;
 }
 .mb-4 {
   margin-bottom: 20px; /* You can adjust the margin as needed */
@@ -260,7 +261,7 @@ export default {
   position: absolute;
   top: 65px;
   right: 20px;
-  bottom: 40px;
+  bottom: 60px;
 }
 .text-right {
   text-align: right;

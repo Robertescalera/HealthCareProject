@@ -21,6 +21,8 @@
           Our team of experienced healthcare professionals is committed to your well-being and ensuring that you receive the best care possible.
         </p>
 
+        
+
         <v-row>
           <v-col v-for="image in images" :key="image.id" cols="12" md="4">
             <v-img :src="image.src" alt="Healthcare Image"></v-img>

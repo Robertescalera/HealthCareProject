@@ -5,8 +5,6 @@
         <h1 class="display-2">HEALTH CARE RECORD</h1>
       </v-col>
     </v-row>
-
-    <!-- Navigation Drawer -->
     <v-navigation-drawer app temporary v-model="drawer" class="top-left-drawer">
       <v-list>
         <v-list-item
@@ -23,7 +21,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- App Bar -->
     <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title class="header-title">
@@ -33,9 +30,7 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
-    <!-- Main Content -->
     <v-card>
-      <!-- Header Row -->
       <v-row class="headerr-row">
         <v-col v-for="header in headers" :key="header.value" class="text-left header-cell">
           {{ header.text }}
@@ -43,7 +38,6 @@
         <v-col class="text-center header-cell">Actions</v-col>
       </v-row>
 
-      <!-- Table Content -->
       <v-card-text>
         <v-row v-for="item in records" :key="item.name" class="content-row">
           <v-col v-for="(value, key) in item" :key="key" class="text-left content-cell">
@@ -56,8 +50,7 @@
         </v-row>
       </v-card-text>
     </v-card>
-
-    <!-- Dialog for Edit Form -->
+    
     <v-dialog v-model="editDialog" max-width="500px">
       <v-card>
         <v-card-title>Edit Record</v-card-title>
@@ -77,13 +70,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <!-- Footer -->
-    <v-footer app color="primary">
-      <v-container>
-        <span>&copy; 2023 Naujan Health Care Center. All rights reserved.</span>
-      </v-container>
-    </v-footer>
   </v-container>
 </template>
 
@@ -134,7 +120,6 @@ export default {
           emergencyContactDetails: 'Emergency Person - +1987654321',
           insuranceInformation: 'ABC Insurance Co.',
         },
-        // Additional records...
       ],
       drawerItems: [
       { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
@@ -146,7 +131,7 @@ export default {
         { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
       editDialog: false,
-      editedRecord: {}, // Store the record being edited
+      editedRecord: {},
     };
   },
   methods: {
@@ -154,23 +139,19 @@ export default {
       this.$router.push(route);
     },
     editRecord(record) {
-      // Open the edit dialog and populate the editedRecord object
       this.editDialog = true;
       this.editedRecord = { ...record };
     },
     closeEditDialog() {
-      // Close the edit dialog
       this.editDialog = false;
-      this.$refs.editForm.reset(); // Reset form fields
+      this.$refs.editForm.reset(); 
     },
     saveEditedRecord() {
-      // Logic to save the edited record goes here
       console.log('Saving edited record:', this.editedRecord);
       this.editDialog = false;
-      this.$refs.editForm.reset(); // Reset form fields
+      this.$refs.editForm.reset(); 
     },
     deleteRecord(record) {
-      // Implement logic to handle delete action
       console.log('Delete record:', record);
     },
   },
