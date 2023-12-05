@@ -18,6 +18,7 @@ import UserSurvey from '../views/UserSurvey.vue';
 import UserInventory from '../views/UserInventory.vue';
 import UserBarangay from '../views/UserBarangay.vue';
 import UserAnnouncement from '../views/UserAnnouncement.vue';
+import staffpanel from '../views/staff/staffpanel.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -39,6 +40,7 @@ const routes = [
   { path: '/UserInventory', name: 'UserInventory', component: UserInventory },
   { path: '/UserBarangay', name: 'UserBarangay', component: UserBarangay },
   { path: '/UserAnnouncement', name: 'UserAnnouncement', component: UserAnnouncement },
+  { path: '/staffpanel', name: 'staffpanel', component: staffpanel },
 ];
 
 const router = createRouter({

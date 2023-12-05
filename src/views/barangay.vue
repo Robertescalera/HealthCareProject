@@ -168,39 +168,4 @@ export default {
 </script>
 
 <style scoped>
-.header-row {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-.text-right {
-  text-align: right;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.add-button-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-.custom-table {
-  width: 500%;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.custom-table th,
-.custom-table td {
-  padding: 20px;
-  border: 1px solid #dddddd;
-  text-align: left;
-}
-.table-row-even {
-  background-color: #f8f9fa;
-}
-
-.table-row-odd {
-  background-color: #e9ecef;
-}
 </style>
