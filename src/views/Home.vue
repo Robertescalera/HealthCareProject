@@ -57,7 +57,6 @@
         </v-sheet>
       </v-container>
 
-      <!-- Main Content Section -->
       <v-container fluid>
         <v-sheet class="background-sheet main-content-section" :style="{ backgroundImage: 'url()' }">
           <v-row align="center" justify="center" class="fill-height">
@@ -71,7 +70,6 @@
         </v-sheet>
       </v-container>
 
-      <!-- Navigation Drawer -->
       <v-navigation-drawer app temporary v-model="drawer">
         <v-list dense nav>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -121,39 +119,36 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 1px; /* Add padding for space around content */
+  padding: 1px; 
 }
 
 .intro-section,
 .services-section,
 .contact-section,
 .main-content-section {
-  min-height: 100vh; /* Set minimum height to full viewport height */
-  min-width: 91vw; /* Set minimum width to full viewport width */
+  min-height: 100vh; 
+  min-width: 91vw; 
 }
 
 .fill-height {
-  height: 100%; /* Fill available height in sections */
+  height: 100%; 
 }
 
 .text-styled {
-  font-size: 18px; /* Adjust font size */
-  font-weight: bold; /* Make text bold */
-  color: #ffffff; /* Set text color */
-  text-transform: uppercase; /* Transform text to uppercase */
+  font-size: 18px; 
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase; 
   letter-spacing: 2px;
-  text-align: left; /* Adjust letter spacing */
-  /* Add any other styles as needed */
+  text-align: left;
 }
 
-/* Responsive Styles */
 @media (max-width: 1000px) {
   .background-sheet {
     background-size: contain;
   }
 }
 
-/* Remove default margin and padding */
 .v-container {
   margin: 0;
   padding: 0;
@@ -165,6 +160,6 @@ export default {
 }
 
 .registration-btn {
-  border: 1px solid #ffffff; /* Change color and thickness as needed */
+  border: 1px solid #ffffff; 
 }
 </style>

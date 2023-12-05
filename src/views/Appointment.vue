@@ -6,7 +6,6 @@
         </v-col>
       </v-row>
   
-      <!-- Navigation Drawer -->
       <v-navigation-drawer app temporary v-model="drawer" class="top-left-drawer">
         <v-list>
           <v-list-item
@@ -23,7 +22,6 @@
         </v-list>
       </v-navigation-drawer>
   
-      <!-- App Bar -->
       <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-app-bar-title class="header-title">
@@ -33,9 +31,7 @@
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
   
-      <!-- Main Content -->
       <v-card>
-        <!-- Header Row -->
         <v-row class="headerr-row">
           <v-col v-for="header in headers" :key="header.value" class="text-left header-cell">
             {{ header.text }}
@@ -43,7 +39,6 @@
           <v-col class="text-center header-cell">Actions</v-col>
         </v-row>
   
-        <!-- Table Content -->
         <v-card-text>
           <v-row v-for="item in records" :key="item.name" class="content-row">
             <v-col v-for="(value, key) in item" :key="key" class="text-left content-cell">
@@ -57,7 +52,6 @@
         </v-card-text>
       </v-card>
   
-      <!-- Dialog for Edit Form -->
       <v-dialog v-model="editDialog" max-width="500px">
         <v-card>
           <v-card-title>Edit Record</v-card-title>

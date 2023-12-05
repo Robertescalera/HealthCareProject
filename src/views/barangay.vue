@@ -1,8 +1,6 @@
 <template>
   <v-container>
-    <!-- Navigation Drawer -->
     <v-navigation-drawer app temporary v-model="drawer">
-      <!-- Drawer content -->
       <v-list>
         <v-list-item
           prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
@@ -18,9 +16,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- App Bar -->
     <v-app-bar app color="primary">
-      <!-- App bar content -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         ADMIN NAUJAN HEALTH CARE CENTER
@@ -29,14 +25,12 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
-    <!-- Header Row -->
     <v-row class="header-row">
       <v-col class="text-right">
         <h1>ADMIN ANALYTICS</h1>
       </v-col>
     </v-row>
 
-    <!-- Table -->
     <v-row>
       <v-col>
         <v-simple-table class="custom-table">
@@ -65,21 +59,19 @@
                   <v-btn @click="deleteRow(index)">Delete</v-btn>
                 </td>
               </tr>
-              <!-- Add more rows as needed -->
+
             </tbody>
           </template>
         </v-simple-table>
       </v-col>
     </v-row>
     
-    <!-- Add Button -->
     <v-row class="add-button-row">
       <v-col class="text-right">
         <v-btn color="primary" @click="showForm = true">Add</v-btn>
       </v-col>
     </v-row>
 
-    <!-- Form for adding/updating data -->
     <v-row v-if="showForm">
       <v-col>
         <v-form ref="form" @submit.prevent="submitForm">
@@ -135,7 +127,6 @@ export default {
         { baranggay: 'Baranggay 2', disease: 'Cold', deaths: 3, sick: 15 },
         { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20 },
         { baranggay: 'Baranggay 2', disease: 'Cold', deaths: 3, sick: 15 },
-        // Add more data rows as needed
       ],
       showForm: false,
       formData: {
@@ -154,21 +145,15 @@ export default {
       this.drawer = false;
     },
     updateRow(index) {
-      // Handle update action for the row at the given index
-      // Implement logic to update data or perform necessary actions
     },
     deleteRow(index) {
-      // Handle delete action for the row at the given index
-      // Implement logic to delete data or perform necessary actions
     },
     submitForm() {
-      // Handle form submission - Save data to tableData
       this.tableData.push({ ...this.formData });
       this.showForm = false;
       this.resetForm();
     },
     resetForm() {
-      // Reset form data after submission
       this.formData = {
         baranggay: '',
         disease: '',

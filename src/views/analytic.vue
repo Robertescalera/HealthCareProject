@@ -1,6 +1,5 @@
 <template>
     <v-container>
-      <!-- Navigation Drawer -->
       <v-navigation-drawer app temporary v-model="drawer">
         <v-list>
           <v-list-item
@@ -17,7 +16,6 @@
         </v-list>
       </v-navigation-drawer>
   
-      <!-- App Bar -->
       <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-app-bar-title>
@@ -27,14 +25,12 @@
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
   
-      <!-- Header Row -->
       <v-row class="header-row">
         <v-col class="text-right">
           <h1>ADMIN ANALYTICS</h1>
         </v-col>
       </v-row>
   
-      <!-- Buttons Row -->
       <v-row class="button-row">
         <v-col>
           <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Toggle Chart 1</v-btn>
@@ -42,7 +38,6 @@
         </v-col>
       </v-row>
   
-      <!-- Chart 1 -->
       <v-main>
         <v-container v-if="chart1Visible">
           <v-row>
@@ -53,7 +48,6 @@
         </v-container>
       </v-main>
   
-      <!-- Chart 2 -->
       <v-main>
         <v-container v-if="chart2Visible">
           <v-row>

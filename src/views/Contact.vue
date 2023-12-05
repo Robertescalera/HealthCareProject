@@ -59,14 +59,11 @@ export default {
       this.$router.push(route);
     },
     submitForm() {
-      // Implement form submission logic
       console.log('Contact form submitted:', this.contactForm);
-      // You can add your logic to send the form data to a server or perform other actions
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add your styling here */
 </style>

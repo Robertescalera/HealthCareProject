@@ -1,8 +1,8 @@
 <template>
   <v-container>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <!-- Navigation Drawer -->
     <v-navigation-drawer app temporary v-model="drawer">
       <v-list>
         <v-list-item
@@ -28,18 +28,13 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
-
-
-    <!-- Header Row -->
     <v-row class="header-row">
       <v-col class="text-right">
         <h1>ADMIN DASHBOARD</h1>
       </v-col>
     </v-row>
 
-    <!-- Cards -->
     <v-row class="card">
-      <!-- Total Users Card -->
       <v-col cols="12" md="4" class="mb-4">
         <v-card>
           <v-card-title>
@@ -52,7 +47,6 @@
         </v-card>
       </v-col>
 
-      <!-- Total Patients Card -->
       <v-col cols="12" md="4" class="mb-4">
         <v-card>
           <v-card-title>
@@ -65,7 +59,6 @@
         </v-card>
       </v-col>
 
-      <!-- Total Medicine Card -->
       <v-col cols="12" md="4" class="mb-4">
         <v-card>
           <v-card-title>
@@ -79,7 +72,6 @@
       </v-col>
     </v-row>
 
-    <!-- Buttons for Chart Visibility -->
     <v-row class="top-left-buttons">
       <v-col>
         <v-btn @click="toggleChartVisibility('chart1', chart1Visible)">Toggle Chart 1</v-btn>
@@ -87,7 +79,6 @@
       </v-col>
     </v-row>
 
-    <!-- Chart 1 -->
     <v-main>
       <v-container v-if="chart1Visible">
         <v-row>
@@ -98,7 +89,6 @@
       </v-container>
     </v-main>
 
-    <!-- Chart 2 -->
     <v-main>
       <v-container v-if="chart2Visible">
         <v-row>
@@ -109,19 +99,18 @@
       </v-container>
     </v-main>
 
-    <!-- Leaflet Map -->
     <v-main>
-      <v-container>
+      <v-form>
         <div id="map" style="height: 400px;"></div>
-      </v-container>
+      </v-form>
     </v-main>
   </v-container>
 </template>
 
 <script>
-import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
-import L from 'leaflet'; // Import Leaflet
-import Chart from 'chart.js/auto'; // Import Chart.js
+import 'leaflet/dist/leaflet.css'; 
+import L from 'leaflet'; 
+import Chart from 'chart.js/auto'; 
 
 export default {
   name: 'Dashboard',
@@ -145,7 +134,6 @@ export default {
     };
   },
   methods: {
-    // Function to toggle chart visibility
     toggleChartVisibility(chartId, isVisible) {
       this[`${chartId}Visible`] = !isVisible;
 
@@ -183,10 +171,7 @@ export default {
         }
       });
     },
-    // Function to retrieve chart data
     getChartData(chartId) {
-      // Replace with your chart data retrieval logic for chart1 and chart2
-      // Example data is used here for demonstration purposes
       if (chartId === 'chart1') {
         return {
           labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
@@ -216,9 +201,8 @@ export default {
       }
       return null;
     },
-    // Function to initialize Leaflet map
     initializeMap() {
-      const map = L.map('map').setView([13.3833, 121.1833], 13); // Coordinates for Naujan, Oriental Mindoro, Philippines
+      const map = L.map('map').setView([13.3833, 121.1833], 13); 
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -247,29 +231,4 @@ export default {
 
 
 <style scoped>
-.top-left-buttons {
-  position: absolute;
-  top: 50px;
-  left: 20px;
-  bottom: 60px;
-}
-.mb-4 {
-  margin-bottom: 20px; /* You can adjust the margin as needed */
-}
-
-.header-row {
-  position: absolute;
-  top: 65px;
-  right: 20px;
-  bottom: 60px;
-}
-.text-right {
-  text-align: right;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.card {
-  top: 40px;
-}
 </style>

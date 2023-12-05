@@ -28,42 +28,33 @@
     </v-app-bar>
   
     <!-- Header -->
-    <v-row class="header-row">
+   <!-- Header -->
+   <v-row class="header-row">
       <v-col cols="12">
         <h1 class="display-2">Medication Inventory</h1>
       </v-col>
     </v-row>
 
     <!-- Medication Inventory Table -->
-    <v-card>
-      <v-card-text>
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Medication Name</th>
-                <th scope="col">Quantity Available</th>
-                <th scope="col">Expiry Date</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(medication, index) in medications" :key="index">
-                <td>{{ medication.MedicationName }}</td>
-                <td>{{ medication.Quantity }}</td>
-                <td>{{ medication.ExpiryData }}</td>
-                <td>
-                  <v-btn color="primary" @click="editMedication(index)">Update</v-btn>
-                  <v-btn color="error" @click="deleteMedication(index)">Delete</v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- Button to Add Medication -->
-        <v-btn color="success" @click="showAddForm">Add Medication</v-btn>
-      </v-card-text>
+    <v-card flat>
+      <template v-slot:text>
+        <v-text-field
+          v-model="search"
+          label="Search"
+          prepend-inner-icon="mdi-magnify"
+          single-line
+          variant="outlined"
+          hide-details
+        ></v-text-field>
+      </template>
+
+      <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
     </v-card>
+
+    <!-- Button to Add Medication -->
+    <v-card-text>
+      <v-btn color="success" @click="showAddForm">Add Medication</v-btn>
+    </v-card-text>
 
     <!-- Update/Add Medication Form Dialog -->
     <v-dialog v-model="dialog" max-width="500">
@@ -84,6 +75,7 @@
       </v-card>
     </v-dialog>
   </v-container>
+
 </template>
 
 <script>
@@ -94,7 +86,7 @@ export default {
   data() {
     return {
       drawer: false,
-      drawerItems: [
+      drawerItems: [  // Include your drawer items
         { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
         { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
         { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
@@ -103,20 +95,85 @@ export default {
         { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
         { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
       ],
-      medications: [], // Array to hold medication data fetched from the backend
-      dialog: false,
       isEdit: false,
-      valid: false,
+      dialog: false,
+      search: '',
+      medications: [],
+      headers: [
+        {
+          align: 'start',
+          key: 'name',
+          sortable: false,
+          title: 'Dessert (100g serving)',
+        },
+        { key: 'calories', title: 'Calories' },
+        { key: 'fat', title: 'Fat (g)' },
+        { key: 'carbs', title: 'Carbs (g)' },
+        { key: 'protein', title: 'Protein (g)' },
+        { key: 'iron', title: 'Iron (%)' },
+      ],
+      desserts: [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+            iron: 1,
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: 1,
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: 7,
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: 8,
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+            iron: 16,
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+            iron: 0,
+          },
+        ],
       editedMedication: {
-        Medicationame: '',
+        name: '',
         quantity: '',
-        expiry: '',
+        expiry: ''
       },
     };
   },
+
   created() {
     this.getInfo(); // Fetch data from the backend when the component is created
   },
+
   methods: {
     navigateTo(route) {
       this.$router.push(route);
@@ -124,7 +181,7 @@ export default {
     },
     getInfo() {
       // Fetch data from backend API
-      axios.get('/getData') // Use the Axios base URL + '/getData'
+      axios.get('/getData')
         .then((response) => {
           this.medications = response.data; // Set received data to medications array
         })
@@ -145,23 +202,16 @@ export default {
     saveMedication() {
       if (this.$refs.medForm.validate()) {
         if (this.isEdit) {
-          // Update existing medication
           const index = this.medications.findIndex(
             (medication) => medication.name === this.editedMedication.name
           );
           if (index !== -1) {
-            // Call API to update the medication
             axios.put(`/updateMedication/${this.medications[index].id}`, this.editedMedication)
               .then((response) => {
-                // Update local data or perform other actions as needed
                 console.log('Medication updated:', response.data);
-
-                // Update specific properties of the medication object
                 this.medications[index].name = response.data.MedicationName;
                 this.medications[index].quantity = response.data.Quantity;
                 this.medications[index].expiry = response.data.ExpiryData;
-
-                // Close dialog after successful update
                 this.closeDialog();
               })
               .catch((error) => {
@@ -170,16 +220,14 @@ export default {
           }
         } else {
           // Add new medication
-          // Call API to add the new medication (if required)
-          // Note: Implement API call to add new medication
+          // Implement API call to add new medication if required
           this.medications.push({ ...this.editedMedication });
           this.closeDialog();
         }
       }
     },
     deleteMedication(index) {
-      // Call API to delete the medication (if required)
-      // Note: Implement API call to delete medication
+      // Implement API call to delete the medication if required
       this.medications.splice(index, 1);
     },
     closeDialog() {
@@ -193,47 +241,5 @@ export default {
 
 
 <style scoped>
-/* Add any additional styling as needed */
-.header-row {
-    margin-bottom: 20px;
-    text-align: right;
-    font-size: 10px;
-}
 
-.table-responsive {
-  overflow-x: auto;
-}
-
-.table {
-  width: 100%;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.table th,
-.table td {
-  padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #dee2e6;
-}
-
-.table thead th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #dee2e6;
-  background-color: #007bff;
-  color: #fff;
-}
-
-.table tbody+tbody {
-  border-top: 2px solid #dee2e6;
-}
-
-.table-bordered {
-  border: 1px solid #dee2e6;
-}
-
-.table-bordered th,
-.table-bordered td {
-  border: 1px solid #dee2e6;
-}
 </style>
