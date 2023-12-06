@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="primary">
+  <v-app-bar app>
     <v-app-bar-title>
       NAUJAN HEALTH CARE CENTER
     </v-app-bar-title>
