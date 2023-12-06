@@ -21,6 +21,10 @@
               <v-btn type="submit" color="primary" block>Register</v-btn>
             </v-form>
           </v-card-text>
+          <v-card-actions class="justify-center">
+            <span>Login</span>
+            <v-btn text color="primary" @click="navigateTo('/Register')">Click here</v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>

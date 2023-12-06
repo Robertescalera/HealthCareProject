@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import SignIn from '../views/SignIn.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import Register from '../views/Register.vue';
-import SignIn from '../views/SignIn.vue';
 import adminpanel from '../views/adminpanel.vue';
 import residentpanel from '../views/residentpanel.vue';
 import HealthRecords from '../views/HealthRecords.vue';
@@ -21,11 +20,10 @@ import UserAnnouncement from '../views/UserAnnouncement.vue';
 import staffpanel from '../views/staff/staffpanel.vue';
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
+  { path: '/', name: 'SignIn', component: SignIn },
   { path: '/about', name: 'About', component: About },
   { path: '/contact', name: 'Contact', component: Contact },
   { path: '/register', name: 'Register', component: Register },
-  { path: '/signin', name: 'SignIn', component: SignIn },
   { path: '/adminpanel', name: 'AdminPanel', component: adminpanel },
   { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel },
   { path: '/HealthRecords', name: 'HealthRecords', component: HealthRecords },
