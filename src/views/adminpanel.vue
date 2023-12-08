@@ -124,7 +124,7 @@ export default {
       totalMedicine: 300, // Replace with actual total medicine count
       drawerItems: [
         { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-        { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Appointment', icon: 'mdi-lock', route: 'Appointment' },
         { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
         { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },

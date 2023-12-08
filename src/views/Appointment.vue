@@ -124,11 +124,12 @@
           // Additional records...
         ],
         drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
-        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
-        { title: 'Appointment', icon: 'mdi-access-point', route: 'Appointment' },
-        { title: 'Inventory', icon: 'mdi-access-point', route: 'UserInventory' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+        { title: 'Appointment', icon: 'mdi-lock', route: 'Appointment' },
+        { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
+        { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
         { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
         ],
         editDialog: false,

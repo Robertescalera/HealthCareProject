@@ -1,4 +1,5 @@
 <template>
+  
   <v-container>
     <v-navigation-drawer app temporary v-model="drawer">
       <v-list>
@@ -15,8 +16,8 @@
         </v-list>
       </v-list>
     </v-navigation-drawer>
-
-    <v-app-bar app color="primary">
+    <v-container>
+      <v-app-bar app color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         ADMIN NAUJAN HEALTH CARE CENTER
@@ -24,12 +25,16 @@
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
+  </v-container>
 
-    <v-row class="header-row">
-      <v-col class="text-right">
-        <h1>ADMIN ANALYTICS</h1>
+  <v-row class="text-left">
+      <v-col class="text-left">
+        <h1 class="title">ADMIN ANALYTICS</h1>
       </v-col>
     </v-row>
+
+  <v-app>
+    
 
     <v-row>
       <v-col>
@@ -37,13 +42,13 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">Baranggay</th>
-                <th class="text-left">Disease</th>
-                <th class="text-left">Deaths</th>
-                <th class="text-left">Sick</th>
-                <th class="text-left">Age</th>
-                <th class="text-left">Gender</th>
-                <th class="text-left">Actions</th>
+                <th>Baranggay</th>
+                <th>Disease</th>
+                <th>Deaths</th>
+                <th>Sick</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -55,19 +60,18 @@
                 <td>{{ row.age }}</td>
                 <td>{{ row.gender }}</td>
                 <td>
-                  <v-btn @click="updateRow(index)">Update</v-btn>
-                  <v-btn @click="deleteRow(index)">Delete</v-btn>
+                  <v-btn @click="updateRow(index)" color="primary">Update</v-btn>
+                  <v-btn @click="deleteRow(index)" color="error">Delete</v-btn>
                 </td>
               </tr>
-
             </tbody>
           </template>
         </v-simple-table>
       </v-col>
     </v-row>
-    
+
     <v-row class="add-button-row">
-      <v-col class="text-right">
+      <v-col class="text-left">
         <v-btn color="primary" @click="showForm = true">Add</v-btn>
       </v-col>
     </v-row>
@@ -95,14 +99,16 @@
               <v-text-field v-model="formData.gender" label="Gender"></v-text-field>
             </v-col>
           </v-row>
-          <v-row class="text-right">
-            <v-btn @click="showForm = false">Cancel</v-btn>
+          <v-row class="text-center">
+            <v-btn @click="showForm = false" color="error">Cancel</v-btn>
             <v-btn type="submit" color="primary">Save</v-btn>
           </v-row>
         </v-form>
       </v-col>
     </v-row>
+  </v-app>
   </v-container>
+
 </template>
 
 <script>
@@ -168,4 +174,29 @@ export default {
 </script>
 
 <style scoped>
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  min-width: 150px;
+  height: 80px;
+  
+}
+
+.table-row-even {
+  background-color: #f0f0f0; /* Light gray background for even rows */
+}
+
+.table-row-odd {
+  background-color: #ffffff; /* White background for odd rows */
+}
+
+.add-button-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.add-button-row v-btn {
+  color: #ffffff; /* White text color for the "Add" button */
+}
 </style>
