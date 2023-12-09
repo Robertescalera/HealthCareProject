@@ -33,7 +33,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Registration',
+  name: 'Register',
   data() {
     return {
       userForm: {

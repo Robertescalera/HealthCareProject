@@ -18,6 +18,7 @@ import UserInventory from '../views/UserInventory.vue';
 import UserBarangay from '../views/UserBarangay.vue';
 import UserAnnouncement from '../views/UserAnnouncement.vue';
 import staffpanel from '../views/staff/staffpanel.vue';
+import login from '../views/LoginView.vue';
 
 const routes = [
   { path: '/', name: 'SignIn', component: SignIn },
@@ -25,7 +26,7 @@ const routes = [
   { path: '/contact', name: 'Contact', component: Contact },
   { path: '/register', name: 'Register', component: Register },
   { path: '/adminpanel', name: 'AdminPanel', component: adminpanel },
-  { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel },
+  { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel, meta: {requiresAuth: true}},
   { path: '/HealthRecords', name: 'HealthRecords', component: HealthRecords },
   { path: '/dashboard', name: 'Dashboard', component: dash },
   { path: '/analytic', name: 'Analytic', component: analytic },
@@ -39,11 +40,36 @@ const routes = [
   { path: '/UserBarangay', name: 'UserBarangay', component: UserBarangay },
   { path: '/UserAnnouncement', name: 'UserAnnouncement', component: UserAnnouncement },
   { path: '/staffpanel', name: 'staffpanel', component: staffpanel },
+  { path: '/LoginView', name: 'login', component: login },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, from, next) =>{
+  const isLoggedin = checkUserLogin();
+  if(to.matched.some((record) =>record.meta.reruiresAuth))
+  {
+    if (!isLoggedin)
+    {
+      next("/SignIn");
+    }
+    else
+    {
+      next();
+    }
+  }
+  else{
+    next();
+  }
+});
+
+function checkUserLogin() 
+{
+  const userToken = sessionStorage.getItem("token");
+  return !!userToken;
+}
 
 export default router;
