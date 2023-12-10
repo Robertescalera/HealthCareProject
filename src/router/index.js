@@ -14,13 +14,14 @@ import barangay from '../views/AdminPanel/barangay.vue';
 import announcement from '../views/AdminPanel/announcement.vue';
 import appointment from '../views/AdminPanel/appointment.vue';
 import UserAppointment from '../views/UserPanel/UserAppointment.vue';
-import UserSurvey from '../views/UserSurvey.vue';
+import UserSurvey from '../views/UserPanel/UserSurvey.vue';
 import UserInventory from '../views/UserInventory.vue';
-import UserBarangay from '../views/UserBarangay.vue';
-import UserAnnouncement from '../views/UserAnnouncement.vue';
+import UserBarangay from '../views/UserPanel/UserBarangay.vue';
+import UserAnnouncement from '../views/UserPanel/UserAnnouncement.vue';
 import staffpanel from '../views/staff/staffpanel.vue';
 import login from '../views/LoginView.vue';
 import main from '../views/main.vue';
+
 
 const routes = [
   { path: '/', name: 'SignIn', component: SignIn },

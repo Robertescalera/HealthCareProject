@@ -56,7 +56,7 @@
       <v-card outlined>
         <v-card-title>Bar Chart</v-card-title>
         <v-card-text>
-          <canvas id="barChart" ref="barChart" style="max-width: 400px; height: 2px;"></canvas>
+          <canvas id="barChart" ref="barChart" style="max-width: 900px; height: 2px;"></canvas>
         </v-card-text>
       </v-card>
     </v-col>
@@ -70,10 +70,17 @@
 import Chart from 'chart.js/auto';
 
 export default {
-  name: 'Dashboard',
+  name: 'residentpanel',
   data() {
     return {
       drawer: false,
+      drawerItems: [
+      { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+        { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+      ],
       dashboardCards: [
         { title: 'Patients Admitted', data: '20' },
         { title: 'Doctors Available', data: '10' },
@@ -94,13 +101,13 @@ export default {
       this.barChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+          labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5','Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
           datasets: [{
             label: 'Sample Data',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
-            data: [65, 59, 80, 81, 56],
+            data: [65, 59, 80, 81, 56, 90, 90, 100, 200, 300],
           }],
         },
         options: {
@@ -113,7 +120,8 @@ export default {
       });
     },
     navigateTo(route) {
-      // Your navigation logic here
+      this.$router.push(route);
+        this.drawer = false;
     },
   },
   mounted() {

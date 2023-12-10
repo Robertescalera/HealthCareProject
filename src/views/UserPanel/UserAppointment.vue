@@ -10,8 +10,8 @@
         <v-list>
           <v-list-item
             prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-            title="Lolo mo User"
-            subtitle="LOLOmoUser@gmailcom"
+            title="Obet"
+            subtitle="Obet@gmailcom"
           ></v-list-item>
         </v-list>
         <v-list dense nav>
@@ -30,6 +30,8 @@
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
+      </v-container>
+      <v-app>
   
       <v-card>
         <v-row class="headerr-row">
@@ -81,7 +83,7 @@
       <v-btn fab dark fixed right bottom @click="openAppointmentForm">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
-    </v-container>
+    </v-app>
   </template>
   
   <script>
@@ -114,13 +116,11 @@
           // Additional records...
         ],
         drawerItems: [
-          { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Appointment', icon: 'mdi-lock', route: 'Appointment' },
-          { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
-          { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
-          { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-          { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
-          { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+        { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
+        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
         ],
         editDialog: false,
         editedRecord: {},

@@ -6,8 +6,8 @@
         <v-list>
           <v-list-item
             prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-            title="Lolo mo Admin"
-            subtitle="LOLOmoADMIN@gmailcom"
+            title="Obet"
+            subtitle="Obet@gmailcom"
           ></v-list-item>
           <v-list dense nav>
             <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
@@ -28,6 +28,8 @@
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
+      </v-container>
+      <v-app>
   
       <!-- Header Row -->
       <v-row class="header-row">
@@ -110,7 +112,7 @@
           </v-form>
         </v-col>
       </v-row>
-    </v-container>
+    </v-app>
   </template>
   
   <script>
@@ -180,7 +182,7 @@
   <style scoped>
   .header-row {
     position: absolute;
-    top: 20px;
+    top: 1px;
     right: 20px;
   }
   .text-right {
@@ -194,17 +196,14 @@
     justify-content: flex-end;
     margin-top: 20px;
   }
-  .custom-table {
-    width: 500%;
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
+
   
   .custom-table th,
   .custom-table td {
     padding: 20px;
     border: 1px solid #dddddd;
     text-align: left;
+    width: 400px;
   }
   .table-row-even {
     background-color: #f8f9fa;
