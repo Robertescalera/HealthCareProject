@@ -2,7 +2,7 @@
     <v-container>
       <v-row class="header-row">
         <v-col class="text-right">
-          <h1 class="display-2"> YOUR   APPOINTMENT</h1>
+          <h1 class="display-2"> YOUR APPOINTMENT</h1>
         </v-col>
       </v-row>
   
@@ -77,6 +77,10 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+  
+      <v-btn fab dark fixed right bottom @click="openAppointmentForm">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-container>
   </template>
   
@@ -153,10 +157,10 @@
       openAppointmentForm(record) {
         this.appointmentDialog = true;
         this.appointmentDetails = {
-          name: record.name,
-          date: "",
-          time: "",
-          type: "",
+          name: record ? record.name : '',
+          date: '',
+          time: '',
+          type: '',
         };
       },
   

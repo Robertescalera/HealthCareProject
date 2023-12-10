@@ -1,10 +1,7 @@
 <template>
-  <v-container>
-    <v-row class="header-row">
-      <v-col class="text-right">
-        <h1 class="display-2">HEALTH CARE RECORD</h1>
-      </v-col>
-    </v-row>
+  <v-app>
+    <v-container>
+    
     <v-navigation-drawer app temporary v-model="drawer" class="top-left-drawer">
       <v-list>
         <v-list-item
@@ -29,6 +26,19 @@
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
+
+    <v-row class="header-row">
+      <v-col class="text-right">
+        <h1 class="display-2">HEALTH CARE RECORD</h1>
+      </v-col>
+    </v-row>
+    <v-row class="header-row">
+      <v-col class="text-right">
+        <h1 class="display-2">HEALTH CARE RECORD</h1>
+      </v-col>
+    </v-row>
+
+    </v-container>
 
     <v-card>
       <v-row class="headerr-row">
@@ -59,9 +69,9 @@
             <v-text-field v-model="editedRecord.name" label="Name"></v-text-field>
             <v-text-field v-model="editedRecord.dateOfBirth" label="Date of Birth"></v-text-field>
             <v-text-field v-model="editedRecord.gender" label="Gender"></v-text-field>
-            <v-text-field v-model="editedRecord.contactNumber" label="Contact Number"></v-text-field>
-            <v-text-field v-model="editedRecord.emergencyContactDetails" label="Emergency Contact"></v-text-field>
-            <v-text-field v-model="editedRecord.insuranceInformation" label="Insurance Information"></v-text-field>
+            <v-text-field v-model="editedRecord.contactNumber" label="Disease"></v-text-field>
+            <v-text-field v-model="editedRecord.emergencyContactDetails" label="Days"></v-text-field>
+            <v-text-field v-model="editedRecord.insuranceInformation" label=""></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -70,7 +80,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -83,42 +93,37 @@ export default {
         { text: 'Name', value: 'name' },
         { text: 'Date of Birth', value: 'dateOfBirth' },
         { text: 'Gender', value: 'gender' },
-        { text: 'Contact Number', value: 'contactNumber' },
-        { text: 'Emergency Contact Details', value: 'emergencyContactDetails' },
-        { text: 'Insurance Information', value: 'insuranceInformation' },
+        { text: 'disease', value: 'disease' },
+        { text: 'days', value: 'days' },
       ],
       records: [
         {
           name: 'John Doe',
           dateOfBirth: '1985-05-15',
           gender: 'Male',
-          contactNumber: '+1234567890',
-          emergencyContactDetails: 'Emergency Person - +1987654321',
-          insuranceInformation: 'ABC Insurance Co.',
+          disease: 'cancer',
+          days: '3-4 days',
         },
         {
           name: 'John Doe',
           dateOfBirth: '1985-05-15',
           gender: 'Male',
-          contactNumber: '+1234567890',
-          emergencyContactDetails: 'Emergency Person - +1987654321',
-          insuranceInformation: 'ABC Insurance Co.',
+          disease: 'cancer',
+          days: '3-4 days',
         },
         {
           name: 'John Doe',
           dateOfBirth: '1985-05-15',
           gender: 'Male',
-          contactNumber: '+1234567890',
-          emergencyContactDetails: 'Emergency Person - +1987654321',
-          insuranceInformation: 'ABC Insurance Co.',
+          disease: 'cancer',
+          days: '3-4 days',
         },
         {
           name: 'John Doe',
           dateOfBirth: '1985-05-15',
           gender: 'Male',
-          contactNumber: '+1234567890',
-          emergencyContactDetails: 'Emergency Person - +1987654321',
-          insuranceInformation: 'ABC Insurance Co.',
+          disease: 'cancer',
+          days: '3-4 days',
         },
       ],
       drawerItems: [

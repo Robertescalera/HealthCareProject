@@ -30,7 +30,8 @@
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
-  
+  </v-container>
+  <v-app>
       <v-card>
         <v-row class="headerr-row">
           <v-col v-for="header in headers" :key="header.value" class="text-left header-cell">
@@ -52,26 +53,46 @@
         </v-card-text>
       </v-card>
   
-      <v-dialog v-model="editDialog" max-width="500px">
-        <v-card>
-          <v-card-title>Edit Record</v-card-title>
-          <v-card-text>
-            <v-form ref="editForm">
+      <v-dialog v-model="editDialog" max-width="8000px" height="8000px">
+  <v-card>
+    <v-card-title>Edit Record</v-card-title>
+    <v-card-text>
+      <v-form ref="editForm">
+          <v-row>
+            <v-col cols="10" sm="6">
               <v-text-field v-model="editedRecord.name" label="Name"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field v-model="editedRecord.dateOfBirth" label="Date of Birth"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm="6">
               <v-text-field v-model="editedRecord.gender" label="Gender"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6">
               <v-text-field v-model="editedRecord.contactNumber" label="Contact Number"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
               <v-text-field v-model="editedRecord.emergencyContactDetails" label="Emergency Contact"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
               <v-text-field v-model="editedRecord.insuranceInformation" label="Insurance Information"></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="blue darken-1" text @click="closeEditDialog">Cancel</v-btn>
-            <v-btn color="blue darken-1" text @click="saveEditedRecord">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-container>
+            </v-col>
+          </v-row>
+      </v-form>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="blue darken-1" text @click="closeEditDialog">Cancel</v-btn>
+      <v-btn color="blue darken-1" text @click="saveEditedRecord">Save</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
+</v-app>
   </template>
   
   <script>
