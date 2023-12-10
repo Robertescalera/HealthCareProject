@@ -1,15 +1,15 @@
 <template>
   <v-app class="blue-background">
-    <v-row justify="center" align="center" class="my-12">
-      <v-col cols="12" sm="8" md="6">
-        <v-card elevation="5" class="pa-4">
+    <v-row justify="center" align="center" class="my-10">
+      <v-col cols="12" sm="10" md="6" class="pr-1">
+        <v-card elevation="10" class="pa-4">
           <v-card-title class="text-h5 text-center mb-4">
-            Sign-In
+            Sign In
           </v-card-title>
           <v-card-text>
             <v-form @submit.prevent="SignIn">
-              <v-text-field v-model="email" label="Email" type="email" required outlined></v-text-field>
-              <v-text-field v-model="password" label="Password" type="password" required outlined></v-text-field>
+              <v-text-field v-model="email" label="Email" type="email" required outlined dense></v-text-field>
+              <v-text-field v-model="password" label="Password" type="password" required outlined dense></v-text-field>
               <v-btn color="primary" block type="submit">Sign In</v-btn>
             </v-form>
           </v-card-text>
@@ -21,13 +21,17 @@
           </v-card-actions>
         </v-card>
       </v-col>
-    </v-row>
 
-    <v-card-title class="text-h2 text-right mb-1">
-      Sign-In
-    </v-card-title>
+      <v-col cols="12" sm="2" md="5" class="pl-2">
+        <v-card-title class="text-h3 mb-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); font-weight: bold;">
+          Welcome To <br>
+          <span style="color: #3f51b5;">Naujan Health Care Center</span>
+        </v-card-title>
+      </v-col>
+    </v-row>
   </v-app>
 </template>
+
 
 <script>
 import axios from 'axios';

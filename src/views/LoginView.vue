@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios';
 
   export default {
@@ -36,7 +37,10 @@ import axios from 'axios';
             username: this.username,
             password: this.password
         });
-        console.log(d.data);
+        if(d.data.msg === 'okay'){
+            sessionStorage.setItem("token", d.data.token);
+            router.push('/main');
+        };
     }
   }
 };
