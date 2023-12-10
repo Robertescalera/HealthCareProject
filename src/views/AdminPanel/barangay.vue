@@ -26,6 +26,8 @@
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
     </v-container>
+    </v-container>
+    <v-app>
   
     <v-row class="text-left">
         <v-col class="text-left">
@@ -107,7 +109,7 @@
         </v-col>
       </v-row>
     </v-app>
-    </v-container>
+    </v-app>
   
   </template>
   
@@ -127,12 +129,12 @@
           { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
         ],
         tableData: [
-          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20 },
-          { baranggay: 'Baranggay 2', disease: 'Cold', deaths: 3, sick: 15 },
-          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20 },
-          { baranggay: 'Baranggay 2', disease: 'Cold', deaths: 3, sick: 15 },
-          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20 },
-          { baranggay: 'Baranggay 2', disease: 'Cold', deaths: 3, sick: 15 },
+          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20, age: 20, gender: 'unknown'},
+          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20, age: 20, gender: 'unknown'},
+          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20, age: 20, gender: 'unknown'},
+          { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20, age: 20, gender: 'unknown'},
+          
+          
         ],
         showForm: false,
         formData: {
@@ -178,7 +180,7 @@
   .custom-table th,
   .custom-table td {
     text-align: center;
-    min-width: 150px;
+    min-width: 215px;
     height: 80px;
     
   }
