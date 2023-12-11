@@ -10,7 +10,8 @@
             <v-form @submit.prevent="SignIn">
               <v-text-field v-model="email" label="Email" type="email" required outlined dense></v-text-field>
               <v-text-field v-model="password" label="Password" type="password" required outlined dense></v-text-field>
-              <v-btn color="primary" block type="submit">Sign In</v-btn>
+              <v-btn :loading="loading" color="primary" block type="submit">Sign In</v-btn>
+              <v-alert v-if="error" type="error" class="mt-2">{{ error }}</v-alert>
             </v-form>
           </v-card-text>
           
@@ -32,7 +33,6 @@
   </v-app>
 </template>
 
-
 <script>
 import axios from 'axios';
 import router from '@/router';
@@ -44,18 +44,31 @@ export default {
     return {
       email: "",
       password: "",
+      loading: false,
+      error: null,
     };
   },
 
   methods: {
     async SignIn() {
-      const d = await axios.post("api/login", {
-        email: this.email,
-        password: this.password
-      });
-      if (d.data.msg === 'okay') {
-        sessionStorage.setItem("token", d.data.token);
-        router.push('/residentpanel');
+      try {
+        this.loading = true;
+        const response = await axios.post("api/SignIn", {
+          email: this.email,
+          password: this.password
+        });
+        console.log('API Response:', response);
+        if (response.data.msg === 'okay') {
+          sessionStorage.setItem("token", response.data.token);
+          router.push('/residentpanel');
+        } else {
+          this.error = 'Invalid credentials';
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        this.error = 'An error occurred while signing in';
+      } finally {
+        this.loading = false;
       }
     },
     

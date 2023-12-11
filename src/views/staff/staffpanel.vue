@@ -22,15 +22,17 @@
       <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-app-bar-title>
-          ADMIN NAUJAN HEALTH CARE CENTER
+          STAFF NAUJAN HEALTH CARE CENTER
         </v-app-bar-title>
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
+      </v-container>
+      <v-app>
   
       <v-row class="header-row">
         <v-col class="text-right">
-          <h1>ADMIN DASHBOARD</h1>
+          <h1>STAFF DASHBOARD</h1>
         </v-col>
       </v-row>
   
@@ -104,7 +106,7 @@
           <div id="map" style="height: 400px;"></div>
         </v-form>
       </v-main>
-    </v-container>
+    </v-app>
   </template>
   
   <script>
