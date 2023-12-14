@@ -119,9 +119,9 @@
         drawer: false,
         chart1Visible: false,
         chart2Visible: false,
-        totalUsers: 500, // Replace with actual total users count
-        totalPatients: 200, // Replace with actual total patients count
-        totalMedicine: 300, // Replace with actual total medicine count
+        totalUsers: 20, // Replace with actual total users count
+        totalPatients: 20, // Replace with actual total patients count
+        totalMedicine: 30, // Replace with actual total medicine count
         drawerItems: [
           { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
           { title: 'Appointment', icon: 'mdi-lock', route: 'appointment' },

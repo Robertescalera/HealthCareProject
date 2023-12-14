@@ -41,7 +41,7 @@
                 <v-form @submit.prevent="submitSurvey">
                   <v-text-field v-model="survey.name" label="Name"></v-text-field>
                   <v-text-field v-model="survey.sickness" label="Sickness"></v-text-field>
-                  <v-text-field v-model="survey.age" label="Disease"></v-text-field>
+                  <v-text-field v-model="survey.age" label="Age"></v-text-field>
                   <v-text-field v-model="survey.days" label="How many days?"></v-text-field>
   
                   <v-btn color="primary" type="submit">Submit</v-btn>
@@ -95,7 +95,7 @@
         this.survey = {
           name: '',
           sickness: '',
-          age: null,
+          age: null,    
           days: null,
         };
       },

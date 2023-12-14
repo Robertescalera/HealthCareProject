@@ -33,6 +33,8 @@
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
 
+    </v-container>
+<v-app>
     <v-main>
       <v-app>
         <!-- Cards Section -->
@@ -49,7 +51,7 @@
         <v-row>
           <v-col cols="12">
             <v-card outlined>
-              <v-card-title>Bar Chart</v-card-title>
+              <v-card-title>MUNICIPALITY ANALYTICS</v-card-title>
               <v-card-text>
                 <canvas id="barChart" ref="barChart" style="max-width: 900px; height: 2px;"></canvas>
               </v-card-text>
@@ -58,7 +60,8 @@
         </v-row>
       </v-app>
     </v-main>
-  </v-container>
+  </v-app>
+
 </template>
 
 <script>
@@ -70,8 +73,8 @@ export default {
   data() {
     return {
       drawer: false,
-      userName: '', // Property to store the user's name
-      userEmail: '', // Property to store the user's email
+      userName: '', 
+      userEmail: '', 
       drawerItems: [
         { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
@@ -81,9 +84,8 @@ export default {
       ],
       dashboardCards: [
         { title: 'Patients Admitted', data: '20' },
-        { title: 'Doctors Available', data: '10' },
         { title: 'Medication Available', data: '30' },
-        { title: 'Total Active Staff', data: '50' },
+        { title: 'Total User', data: '50' },
         { title: 'Severe Disease', data: '5' },
       ],
       barChart: null,
@@ -99,7 +101,7 @@ export default {
       this.barChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5','Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+          labels: ['ADRIALUNA', 'ANDREA YLAGAN', 'ANTIPOLO', 'APITONG', 'ARANGIN','AURORA', 'BACUNGAN', 'BAGONG BUHAY', 'BALITE', 'BANCURO'],
           datasets: [{
             label: 'Sample Data',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -122,9 +124,9 @@ export default {
     },
     async fetchUserInfo() {
       try {
-        const response = await axios.get('/api/getUserInfo'); // Update the API endpoint
-        this.userName = response.data.name; // Assuming the API response has a 'name' property
-        this.userEmail = response.data.email; // Assuming the API response has an 'email' property
+        const response = await axios.get('api/getUserInfo'); 
+        this.userName = response.data.name;
+        this.userEmail = response.data.email; 
       } catch (error) {
         console.error('Error fetching user information:', error);
       }

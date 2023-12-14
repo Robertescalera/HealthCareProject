@@ -16,12 +16,14 @@
           </v-card-text>
           
           <v-divider></v-divider>
-          <v-card-actions class="justify-center">
+          <v-card-actions class="left">
             <span>Don't have an account?</span>
             <v-btn text color="primary" @click="navigateTo('/Register')">Click here</v-btn>
+            <span>Login as Admin?</span> <v-btn text color="primary" @click="navigateTo('/adminLog')">Click here</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
+
 
       <v-col cols="12" sm="2" md="5" class="pl-2">
         <v-card-title class="text-h3 mb-1" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); font-weight: bold;">
@@ -82,7 +84,7 @@ export default {
 <style>
 .pa-4 {
   background-color: #c8ccce;
-  color: #ffffff;
+  color: #1d1717;
   width: 70%;
 }
 .my-12 {
