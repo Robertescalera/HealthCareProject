@@ -27,23 +27,24 @@
   </v-container>
 
     <!-- Header -->
-    <v-row class="header-row">
-        <v-col>
-          <h1 class="text-h5">SURVEY</h1>
-        </v-col>
-      </v-row>
+     <!-- Header -->
+     <v-row class="header-row">
+      <v-col>
+        <h1 class="text-h5">SURVEY</h1>
+      </v-col>
+    </v-row>
 
-      <!-- Data Table -->
-      <v-row>
-        <v-col>
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            :items-per-page="10"
-            class="elevation-1"
-          ></v-data-table>
-        </v-col>
-      </v-row>
+    <!-- Data Table -->
+    <v-row>
+      <v-col>
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          :items-per-page="10"
+          class="elevation-1"
+        ></v-data-table>
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
@@ -59,29 +60,17 @@ export default {
         { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
         { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
+        { title: 'Barangay', icon : 'mdi-access-point', route: 'barangay' },
         { title: 'Announcement', icon: 'mdi-access-point', route: 'survey' },
       ],
       headers: [
         { text: 'ID', value: 'id' },
         { text: 'Name', value: 'name' },
-        { text: 'Email', value: 'email' },
+        { text: 'Email', value: 'sickness' },
         { text: 'Age', value: 'age' },
-        { text: 'Location', value: 'location' },
+        { text: 'Location', value: 'days' },
       ],
-      items: [
-        { id: 1, name: 'John Doe', email: 'single', age: 30, location: 'cancer' },
-        { id: 2, name: 'Jane Smith', email: 'married', age: 28, location: 'lagnat' },
-        { id: 3, name: 'Alice Johnson', email: 'single', age: 35, location: 'ubo' },
-        { id: 4, name: 'John Doe', email: 'single', age: 30, location: 'cancer' },
-        { id: 5, name: 'Jane Smith', email: 'married', age: 28, location: 'lagnat' },
-        { id: 6, name: 'Alice Johnson', email: 'single', age: 35, location: 'ubo' },
-        { id: 7, name: 'John Doe', email: 'single', age: 30, location: 'cancer' },
-        { id: 8, name: 'Jane Smith', email: 'married', age: 28, location: 'lagnat' },
-        { id: 9, name: 'Alice Johnson', email: 'single', age: 35, location: 'ubo' },
-        
-        // Add more items as needed
-      ],
+      items: [],
     };
   },
   methods: {
@@ -89,6 +78,18 @@ export default {
       this.$router.push(route);
       this.drawer = false;
     },
+    async fetchSurveyData() {
+      try {
+        const response = await this.$axios.get('api/getSurveyData');
+        this.items = response.data.data;
+      } catch (error) {
+        console.error('Error fetching survey data:', error);
+      }
+    },
+  },
+  created() {
+    // Fetch survey data when the component is created
+    this.fetchSurveyData();
   },
 };
 </script>

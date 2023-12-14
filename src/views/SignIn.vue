@@ -7,8 +7,8 @@
             Sign In
           </v-card-title>
           <v-card-text>
-            <v-form @submit.prevent="SignIn">
-              <v-text-field v-model="email" label="Email" type="email" required outlined dense></v-text-field>
+            <v-form @submit.prevent="signIn"> <!-- Corrected method name to signIn -->
+              <v-text-field v-model="email" label="Email" required outlined dense></v-text-field>
               <v-text-field v-model="password" label="Password" type="password" required outlined dense></v-text-field>
               <v-btn :loading="loading" color="primary" block type="submit">Sign In</v-btn>
               <v-alert v-if="error" type="error" class="mt-2">{{ error }}</v-alert>
@@ -50,28 +50,28 @@ export default {
   },
 
   methods: {
-    async SignIn() {
+    async signIn() { // Corrected method name to signIn
       try {
         this.loading = true;
         const response = await axios.post("api/SignIn", {
           email: this.email,
           password: this.password
         });
-        console.log('API Response:', response);
-        if (response.data.msg === 'okay') {
-          sessionStorage.setItem("token", response.data.token);
-          router.push('/residentpanel');
+
+        if (response.data.msg === 'user authenticated' || response.data.msg === 'admin authenticated') {
+          sessionStorage.setItem("token", response.data.session_token); // Use the correct field
+          router.push(response.data.role === 'admin' ? '/adminpanel' : '/residentpanel');
         } else {
           this.error = 'Invalid credentials';
         }
       } catch (error) {
         console.error('An error occurred:', error);
-        this.error = 'An error occurred while signing in';
+        this.error = 'Invalid credentials';
       } finally {
         this.loading = false;
       }
     },
-    
+
     navigateTo(route) {
       this.$router.push(route);
     },

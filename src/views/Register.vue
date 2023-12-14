@@ -8,15 +8,47 @@
             <v-form @submit.prevent="registerUser">
               <v-row>
                 <v-col cols="12" md="6">
-                  <v-text-field v-model="userForm.firstName" label="First Name" outlined dense required></v-text-field>
+                  <v-text-field
+                    v-model="userForm.first_name"
+                    label="First Name"
+                    outlined
+                    dense
+                    required
+                    :error-messages="formErrors.first_name"
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-text-field v-model="userForm.lastName" label="Last Name" outlined dense required></v-text-field>
+                  <v-text-field
+                    v-model="userForm.last_name"
+                    label="Last Name"
+                    outlined
+                    dense
+                    required
+                    :error-messages="formErrors.last_name"
+                  ></v-text-field>
                 </v-col>
               </v-row>
-              <v-text-field v-model="userForm.email" label="Email" type="email" outlined dense required></v-text-field>
-              <v-text-field v-model="userForm.password" label="Password" type="password" outlined dense required></v-text-field>
-              <v-btn type="submit" color="primary" block>Register</v-btn>
+              <v-text-field
+                v-model="userForm.email"
+                label="Email"
+                type="email"
+                outlined
+                dense
+                required
+                :error-messages="formErrors.email"
+              ></v-text-field>
+              <v-text-field
+                v-model="userForm.password"
+                label="Password"
+                type="password"
+                outlined
+                dense
+                required
+                :error-messages="formErrors.password"
+              ></v-text-field>
+              <v-btn type="submit" color="primary" block :loading="loading">
+                Register
+              </v-btn>
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-center">
@@ -26,6 +58,11 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="snackbar" :color="snackbarColor" multi-line>
+      {{ snackbarText }}
+      <v-btn text @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -37,42 +74,82 @@ export default {
   data() {
     return {
       userForm: {
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
       },
+      formErrors: {},
+      snackbar: false,
+      snackbarText: '',
+      snackbarColor: 'success',
+      loading: false,
     };
   },
   methods: {
+    async registerUser() {
+      if (this.validateForm()) {
+        try {
+          this.loading = true;
+          const response = await axios.post(
+            "/api/registerUser",
+            this.userForm,
+            { headers: { 'Content-Type': 'application/json' } }
+          );
+
+          if (response.data && response.data.msg === 'User registered successfully') {
+            this.showSnackbar('User registered successfully', 'success');
+          } else {
+            console.error('Invalid response format or registration failed:', response);
+            this.showSnackbar('Registration failed', 'error');
+          }
+        } catch (error) {
+          console.error('Registration failed:', error.response ? error.response.data : error.message);
+          this.showSnackbar('Registration failed', 'error');
+        } finally {
+          this.loading = false;
+        }
+      }
+    },
+
+    validateForm() {
+      this.formErrors = {};
+
+      if (!this.userForm.first_name || !this.userForm.first_name.trim()) {
+        this.$set(this.formErrors, 'first_name', 'First Name is required');
+      }
+
+      if (!this.userForm.last_name || !this.userForm.last_name.trim()) {
+        this.$set(this.formErrors, 'last_name', 'Last Name is required');
+      }
+
+      if (!this.userForm.email || !this.userForm.email.trim()) {
+        this.$set(this.formErrors, 'email', 'Email is required');
+      } else if (!this.isValidEmail(this.userForm.email.trim())) {
+        this.$set(this.formErrors, 'email', 'Invalid email format');
+      }
+
+      if (!this.userForm.password || !this.userForm.password.trim()) {
+        this.$set(this.formErrors, 'password', 'Password is required');
+      }
+
+      return Object.keys(this.formErrors).length === 0;
+    },
+
+    isValidEmail(email) {
+      // Use a regular expression for basic email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    },
+
+    showSnackbar(text, color) {
+      this.snackbarText = text;
+      this.snackbarColor = color;
+      this.snackbar = true;
+    },
+
     navigateTo(route) {
       this.$router.push(route);
-    },
-    registerUser() {
-      // Add form validation logic here before submitting the form
-      if (this.validateForm()) {
-        console.log('User registered:', this.userForm);
-        // Add logic to send the registration data to the server
-        axios.post("http://localhost:8080/api/registerUser", this.userForm)
-          .then(response => {
-            console.log('Registration successful:', response.data);
-            // Handle success, e.g., redirect to login page
-          })
-          .catch(error => {
-            console.error('Registration failed:', error.response.data);
-            // Handle registration failure, e.g., show an error message to the user
-          });
-      }
-    },
-    validateForm() {
-      // Add your form validation logic here
-      // Return true if the form is valid, false otherwise
-      if (!this.userForm.email.includes('@')) {
-        // Invalid email format
-        console.log('Invalid email format');
-        return false;
-      }
-      return true;
     },
   },
 };

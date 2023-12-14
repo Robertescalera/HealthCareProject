@@ -108,6 +108,7 @@
           { text: 'Contact Number', value: 'contactNumber' },
           { text: 'Emergency Contact Details', value: 'emergencyContactDetails' },
           { text: 'Insurance Information', value: 'insuranceInformation' },
+          { text: 'Date Appointed', value: 'Date Appointed' },
         ],
         records: [
           {

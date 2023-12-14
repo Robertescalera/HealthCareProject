@@ -21,7 +21,7 @@ import UserAnnouncement from '../views/UserPanel/UserAnnouncement.vue';
 import staffpanel from '../views/staff/staffpanel.vue';
 import login from '../views/LoginView.vue';
 import main from '../views/main.vue';
-
+import insert from '../views/insert/insert.vue';
 
 const routes = [
   { path: '/', name: 'SignIn', component: SignIn },
@@ -29,7 +29,7 @@ const routes = [
   { path: '/contact', name: 'Contact', component: Contact },
   { path: '/register', name: 'Register', component: Register },
   { path: '/adminpanel', name: 'AdminPanel', component: adminpanel },
-  { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel },
+  { path: '/residentpanel', name: 'ResidentPanel', component: residentpanel, meta: { requiresAuth: true } },
   { path: '/HealthRecords', name: 'HealthRecords', component: HealthRecords },
   { path: '/dashboard', name: 'Dashboard', component: dash },
   { path: '/analytic', name: 'Analytic', component: analytic },
@@ -45,7 +45,8 @@ const routes = [
   { path: '/UserAnnouncement', name: 'UserAnnouncement', component: UserAnnouncement },
   { path: '/staffpanel', name: 'staffpanel', component: staffpanel },
   { path: '/LoginView', name: 'login', component: login },
-  { path: '/main', name: 'main', component: main, meta: {requiresAuth: true}},
+  { path: '/insert', name: 'insert', component: insert },
+  { path: '/main', name: 'main', component: main, meta: { requiresAuth: true } },
 ];
 
 const router = createRouter({
@@ -53,26 +54,20 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) =>{
+router.beforeEach((to, from, next) => {
   const isLoggedin = checkUserLogin();
-  if(to.matched.some((record) =>record.meta.reruiresAuth))
-  {
-    if (!isLoggedin)
-    {
-      next("/SignIn");
-    }
-    else
-    {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isLoggedin) {
+      next("/");
+    } else {
       next();
     }
-  }
-  else{
+  } else {
     next();
   }
 });
 
-function checkUserLogin() 
-{
+function checkUserLogin() {
   const userToken = sessionStorage.getItem("token");
   return !!userToken;
 }

@@ -1,38 +1,37 @@
 <template>
+  <v-app>
     <v-container>
       <v-row class="header-row">
         <v-col class="text-right">
-          <h1 class="display-2"> YOUR APPOINTMENT</h1>
+          <h1 class="display-2">USER APPOINTMENT</h1>
         </v-col>
       </v-row>
-  
-      <v-navigation-drawer app temporary v-model="drawer">
+
+      <v-navigation-drawer app temporary v-model="drawer" class="top-left-drawer">
         <v-list>
           <v-list-item
             prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-            title="Obet"
-            subtitle="Obet@gmailcom"
+            title="Lolo mo User"
+            subtitle="LOLOmoUser@gmailcom"
           ></v-list-item>
-        </v-list>
-        <v-list dense nav>
-          <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
-            <v-icon>{{ item.icon }}</v-icon>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
+          <v-list dense nav>
+            <v-list-item v-for="(item, index) in drawerItems" :key="index" @click="navigateTo(item.route)">
+              <v-icon>{{ item.icon }}</v-icon>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
         </v-list>
       </v-navigation-drawer>
-  
+
       <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-app-bar-title>
-          WELCOME to NAUJAN HEALTH CARE CENTER
-        </v-app-bar-title>
+        <v-app-bar-title class="header-title">NAUJAN HEALTH CARE CENTER</v-app-bar-title>
         <v-spacer></v-spacer>
         <v-btn @click="navigateTo('/')">Logout</v-btn>
       </v-app-bar>
-      </v-container>
-      <v-app>
-  
+    </v-container>
+
+    <v-container>
       <v-card>
         <v-row class="headerr-row">
           <v-col v-for="header in headers" :key="header.value" class="text-left header-cell">
@@ -40,7 +39,7 @@
           </v-col>
           <v-col class="text-center header-cell">Actions</v-col>
         </v-row>
-  
+
         <v-card-text>
           <v-row v-for="item in records" :key="item.name" class="content-row">
             <v-col v-for="(value, key) in item" :key="key" class="text-left content-cell">
@@ -49,136 +48,229 @@
             <v-col class="text-center content-cell">
               <v-icon @click="editRecord(item)" class="action-icons">mdi-pencil</v-icon>
               <v-icon @click="deleteRecord(item)" class="action-icons">mdi-delete</v-icon>
-              <v-icon @click="openAppointmentForm(item)" class="action-icons">mdi-calendar-plus</v-icon>
             </v-col>
           </v-row>
         </v-card-text>
       </v-card>
-  
-      <v-dialog v-model="editDialog" max-width="500px">
-        <!-- ... existing code ... -->
-      </v-dialog>
-  
-      <v-dialog v-model="appointmentDialog" max-width="500px">
+
+      <v-dialog v-model="editDialog" max-width="8000px" height="8000px">
         <v-card>
-          <v-card-title>Appointment Form</v-card-title>
+          <v-card-title>Edit Record</v-card-title>
           <v-card-text>
-            <v-form ref="appointmentForm">
-              <v-text-field v-model="appointmentDetails.name" label="Name"></v-text-field>
-              <v-text-field v-model="appointmentDetails.date" label="Date"></v-text-field>
-              <v-text-field v-model="appointmentDetails.time" label="Time"></v-text-field>
-              <v-text-field v-model="appointmentDetails.type" label="Appointment Type"></v-text-field>
-  
-              <v-date-picker v-model="appointmentDetails.date" label="Select Date"></v-date-picker>
-              <v-time-picker v-model="appointmentDetails.time" label="Select Time"></v-time-picker>
+            <v-form ref="editForm">
+              <v-row>
+                <v-col cols="10" sm="6">
+                  <v-text-field v-model="editedRecord.name" label="Name"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field v-model="editedRecord.date_birth" label="Date of Birth"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6">
+                  <v-text-field v-model="editedRecord.gender" label="Gender"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field v-model="editedRecord.contact" label="Contact Number"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="editedRecord.EmergencyContactDetail" label="Emergency Contact"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="editedRecord.InsuranceInformation" label="Insurance Information"></v-text-field>
+                </v-col>
+              </v-row>
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="blue darken-1" text @click="closeAppointmentDialog">Cancel</v-btn>
-            <v-btn color="blue darken-1" text @click="scheduleAppointment">Schedule</v-btn>
+            <v-btn color="blue darken-1" text @click="closeEditDialog">Cancel</v-btn>
+            <v-btn color="blue darken-1" text @click="saveEditedRecord">Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-  
-      <v-btn fab dark fixed right bottom @click="openAppointmentForm">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-app>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import router from '@/router';
-  
-  export default {
-    name: 'HealthRecords',
-  
-    data() {
-      return {
-        drawer: false,
-        headers: [
-          { text: 'Name', value: 'name' },
-          { text: 'Date of Birth', value: 'dateOfBirth' },
-          { text: 'Gender', value: 'gender' },
-          { text: 'Contact Number', value: 'contactNumber' },
-          { text: 'Emergency Contact Details', value: 'emergencyContactDetails' },
-          { text: 'Insurance Information', value: 'insuranceInformation' },
-        ],
-        records: [
-          {
-            name: 'John Doe',
-            dateOfBirth: '1985-05-15',
-            gender: 'Male',
-            contactNumber: '+1234567890',
-            emergencyContactDetails: 'Emergency Person - +1987654321',
-            insuranceInformation: 'ABC Insurance Co.',
-          },
-          // Additional records...
-        ],
-        drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
-        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
-        { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
-        ],
-        editDialog: false,
-        editedRecord: {},
-        appointmentDialog: false,
-        appointmentDetails: {},
+
+      <v-card>
+        <v-card-title>Add New Record</v-card-title>
+        <v-card-text>
+          <v-form ref="addForm">
+            <v-row>
+              <v-col cols="10" sm="6">
+                <v-text-field v-model="newRecord.name" label="Name"></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="newRecord.date_birth" label="Date of Birth"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="newRecord.gender" label="Gender"></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="newRecord.contact" label="Contact Number"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field v-model="newRecord.EmergencyContactDetail" label="Emergency Contact"></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field v-model="newRecord.InsuranceInformation" label="Insurance Information"></v-text-field>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="blue darken-1" text @click="clearNewRecord">Clear</v-btn>
+          <v-btn color="blue darken-1" text @click="saveNewRecord">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-container>
+  </v-app>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'HealthRecords',
+  data() {
+    return {
+      drawer: false,
+      drawerItems: [
+      { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+          { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+          { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
+          { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+          { title: 'Announcement', icon: 'mdi-access-point', route: 'UserAnnouncement' },
+      ],
+      headers: [
+        { text: 'Name', value: 'name' },
+        { text: 'Date of Birth', value: 'date_birth' },
+        { text: 'Gender', value: 'gender' },
+        { text: 'Contact Number', value: 'contact' },
+        { text: 'Emergency Contact', value: 'EmergencyContactDetail' },
+        { text: 'Insurance Information', value: 'InsuranceInformation' },
+      ],
+      records: [],
+      newRecord: {
+        id: null,
+        name: '',
+        date_birth: '',
+        gender: '',
+        contact: '',
+        EmergencyContactDetail: '',
+        InsuranceInformation: '',
+      },
+      editedRecord: {},
+      editDialog: false,
+    };
+  },
+  methods: {
+    clearNewRecord() {
+      this.newRecord = {
+        id: null,
+        name: '',
+        date_birth: '',
+        gender: '',
+        contact: '',
+        EmergencyContactDetail: '',
+        InsuranceInformation: '',
       };
+      this.$refs.addForm.reset();
     },
-  
-    methods: {
-      navigateTo(route) {
-        this.$router.push(route);
-      },
-  
-      editRecord(record) {
-        this.editDialog = true;
-        this.editedRecord = { ...record };
-      },
-  
-      closeEditDialog() {
-        this.editDialog = false;
-        this.$refs.editForm.reset();
-      },
-  
-      saveEditedRecord() {
-        console.log('Saving edited record:', this.editedRecord);
-        this.editDialog = false;
-        this.$refs.editForm.reset();
-      },
-  
-      deleteRecord(record) {
-        console.log('Delete record:', record);
-      },
-  
-      openAppointmentForm(record) {
-        this.appointmentDialog = true;
-        this.appointmentDetails = {
-          name: record ? record.name : '',
-          date: '',
-          time: '',
-          type: '',
-        };
-      },
-  
-      closeAppointmentDialog() {
-        this.appointmentDialog = false;
-        this.$refs.appointmentForm.reset();
-      },
-  
-      scheduleAppointment() {
-        console.log('Scheduling appointment:', this.appointmentDetails);
-        this.appointmentDialog = false;
-        this.$refs.appointmentForm.reset();
-      },
+    saveNewRecord() {
+      this.loading = true;
+      axios.post('api/addRecord', this.newRecord)
+        .then(response => {
+          console.log('Record saved successfully:', response.data);
+          this.showSnackbar('Record saved successfully', 'success');
+          this.clearNewRecord();
+          this.fetchRecords();
+        })
+        .catch(error => {
+          console.error('Error saving record:', error);
+          this.showSnackbar('Error saving record', 'error');
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
-  };
-  </script>
-  
-  <style scoped>
-  /* ... existing styles ... */
-  </style>
-  
+    fetchRecords() {
+      this.loading = true;
+      axios.get('api/getInfoData')
+        .then(response => {
+          this.records = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching records:', error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    editRecord(item) {
+      this.editedRecord = { ...item };
+      this.editDialog = true;
+    },
+    closeEditDialog() {
+      this.editDialog = false;
+      this.editedRecord = {};
+    },
+    saveEditedRecord() {
+      this.loading = true;
+      axios.put(`api/updateRecord/${this.editedRecord.id}`, this.editedRecord)
+        .then(response => {
+          console.log('Record updated successfully:', response.data);
+          this.showSnackbar('Record updated successfully', 'success');
+          this.editDialog = false;
+          this.editedRecord = {};
+          this.fetchRecords();
+        })
+        .catch(error => {
+          console.error('Error updating record:', error);
+          this.showSnackbar('Error updating record', 'error');
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    deleteRecord(item) {
+      // Implement the logic to delete the record
+      // Make a request to your CodeIgniter 4 backend to delete the record
+      // Fetch updated records after successful deletion
+      this.fetchRecords();
+    },
+    navigateTo(route) {
+      this.$router.push(route);
+    },
+    showSnackbar(message, color) {
+      this.snackbarMessage = message;
+      this.snackbarColor = color;
+      this.snackbar = true;
+    },
+  },
+  created() {
+    this.fetchRecords();
+  },
+};
+</script>
+
+<style scoped>
+.header-row {
+  margin-bottom: 20px;
+  text-align: right;
+  font-size: 10px;
+}
+.headerr-row {
+  margin-bottom: 20px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: bold;
+}
+</style>

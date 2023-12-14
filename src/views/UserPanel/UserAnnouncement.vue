@@ -41,7 +41,7 @@
         <v-card-text>
           <v-data-table
             :headers="tableHeaders"
-            :items="receivedAnnouncements"
+            :announcement="announcement"
             :items-per-page="5"
           ></v-data-table>
         </v-card-text>
@@ -50,32 +50,46 @@
   </template>
   
   <script>
+  import axios from 'axios';
+
   export default {
     data() {
       return {
         drawer: false,
-        receivedAnnouncements: [
-          { title: 'Important Announcement', description: 'Please attend the health seminar on Friday.' },
-          { title: 'Vaccination Drive', description: 'Vaccination drive scheduled next week. Please register.' },
-          // Add more received announcements here
-        ],
         tableHeaders: [
-          { text: 'Title', value: 'title' },
-          { text: 'Description', value: 'description' },
+          {value: 'announcement' },
         ],
-        drawerItems: [
+        announcement: [],
+         drawerItems: [
           { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
           { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
           { title: 'Appointment', icon: 'mdi-access-point', route: 'Appointment' },
           { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
           { title: 'Announcement', icon: 'mdi-access-point', route: 'UserAnnouncement' },
         ],
+       
       };
     },
     methods: {
       navigateTo(route) {
         this.$router.push(route);
       },
+    async fetchandata()
+      {
+        try 
+        {
+            const response = await this.$axios.get('api/anData');
+            this.items = response.data.data();
+
+        }
+        catch (error) {
+            console.error('Error fetching data:', error);
+        }
+      },
+    },
+    created() 
+    {
+        this.fetchandata();
     },
   };
   </script>

@@ -122,23 +122,21 @@
       return {
         drawer: false,
         drawerItems: [
-        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
-        { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
-        { title: 'Appointment', icon: 'mdi-access-point', route: 'Appointment' },
-        { title: 'Inventory', icon: 'mdi-access-point', route: 'UserInventory' },
-        { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'UserAnnouncement' },
+          { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+          { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
+          { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
+          { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
+          { title: 'Announcement', icon: 'mdi-access-point', route: 'UserAnnouncement' },
         ],
         tableData: [
           { baranggay: 'User Baranggay', disease: 'Flu', deaths: 5, sick: 20 },
-          
           // Add more data rows as needed
         ],
         showForm: false,
         formData: {
-          baranggay: '',
+          barangay: '',
           disease: '',
-          deaths: '',
+          deaths: 0,
           sick: '',
           age: '',
           gender: '',
@@ -151,18 +149,39 @@
         this.drawer = false;
       },
       updateRow(index) {
-        // Handle update action for the row at the given index
-        // Implement logic to update data or perform necessary actions
       },
       deleteRow(index) {
-        // Handle delete action for the row at the given index
-        // Implement logic to delete data or perform necessary actions
       },
-      submitForm() {
-        // Handle form submission - Save data to tableData
-        this.tableData.push({ ...this.formData });
-        this.showForm = false;
-        this.resetForm();
+      async submitForm() {
+        try {
+          // Make an HTTP POST request to your CodeIgniter 4 backend
+          const response = await this.$axios.post('/api/addData', this.formData);
+  
+          // Handle the response as needed
+          if (response.status === 201) {
+            // Data insertion successful
+            this.tableData.push(response.data);
+            this.showForm = false;
+            this.resetForm();
+          } else {
+            // Data insertion failed
+            console.error('Failed to add data');
+          }
+        } catch (error) {
+          // Handle errors
+          console.error('Error:', error);
+  
+          // Log the detailed error information
+          if (error.response) {
+            console.error('Response data:', error.response.data);
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
+          } else if (error.request) {
+            console.error('No response received:', error.request);
+          } else {
+            console.error('Error message:', error.message);
+          }
+        }
       },
       resetForm() {
         // Reset form data after submission
@@ -178,6 +197,8 @@
     },
   };
   </script>
+  
+
   
   <style scoped>
   .header-row {

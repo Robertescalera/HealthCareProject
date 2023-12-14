@@ -1,19 +1,18 @@
 <template>
-  
   <v-container>
     <v-row class="header-row">
       <v-col class="text-right">
         <h1>USER DASHBOARD</h1>
+        <h2>Welcome, {{ userName }}</h2> <!-- Display user's name -->
       </v-col>
     </v-row>
 
     <v-navigation-drawer app temporary v-model="drawer">
-      <!-- Include your navigation drawer content here -->
       <v-list>
         <v-list-item
           prepend-avatar="https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png"
-          title="Lolo mo User"
-          subtitle="LOLOmoUser@gmailcom"
+          :title="userName"                       
+          :subtitle="userEmail"
         ></v-list-item>
         <v-divider></v-divider>
         <v-list dense nav>
@@ -26,7 +25,6 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="primary">
-      <!-- Include your app bar content here -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         WELCOME to NAUJAN HEALTH CARE CENTER
@@ -34,9 +32,6 @@
       <v-spacer></v-spacer>
       <v-btn @click="navigateTo('/')">Logout</v-btn>
     </v-app-bar>
-    </v-container>
-
-    <v-app>
 
     <v-main>
       <v-app>
@@ -52,34 +47,37 @@
 
         <!-- Bar Chart Card -->
         <v-row>
-    <v-col cols="12">
-      <v-card outlined>
-        <v-card-title>Bar Chart</v-card-title>
-        <v-card-text>
-          <canvas id="barChart" ref="barChart" style="max-width: 900px; height: 2px;"></canvas>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
+          <v-col cols="12">
+            <v-card outlined>
+              <v-card-title>Bar Chart</v-card-title>
+              <v-card-text>
+                <canvas id="barChart" ref="barChart" style="max-width: 900px; height: 2px;"></canvas>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-app>
     </v-main>
-  </v-app>
+  </v-container>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
+import axios from 'axios';
 
 export default {
-  name: 'residentpanel',
+  name: 'Dashboard',
   data() {
     return {
       drawer: false,
+      userName: '', // Property to store the user's name
+      userEmail: '', // Property to store the user's email
       drawerItems: [
-      { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'residentpanel' },
         { title: 'Survey', icon: 'mdi-access-point', route: 'UserSurvey' },
         { title: 'Appointment', icon: 'mdi-access-point', route: 'UserAppointment' },
         { title: 'Barangay', icon: 'mdi-access-point', route: 'UserBarangay' },
-        { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+        { title: 'Announcement', icon: 'mdi-access-point', route: 'UserAnnouncement' },
       ],
       dashboardCards: [
         { title: 'Patients Admitted', data: '20' },
@@ -121,11 +119,20 @@ export default {
     },
     navigateTo(route) {
       this.$router.push(route);
-        this.drawer = false;
+    },
+    async fetchUserInfo() {
+      try {
+        const response = await axios.get('/api/getUserInfo'); // Update the API endpoint
+        this.userName = response.data.name; // Assuming the API response has a 'name' property
+        this.userEmail = response.data.email; // Assuming the API response has an 'email' property
+      } catch (error) {
+        console.error('Error fetching user information:', error);
+      }
     },
   },
   mounted() {
     this.createBarChart();
+    this.fetchUserInfo();
   },
 };
 </script>
