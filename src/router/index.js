@@ -22,6 +22,7 @@ import staffpanel from '../views/staff/staffpanel.vue';
 import login from '../views/LoginView.vue';
 import main from '../views/main.vue';
 import insert from '../views/insert/insert.vue';
+import users from '../views/AdminPanel/users.vue';
 
 const routes = [
   { path: '/', name: 'SignIn', component: SignIn },
@@ -47,6 +48,7 @@ const routes = [
   { path: '/LoginView', name: 'login', component: login },
   { path: '/insert', name: 'insert', component: insert },
   { path: '/main', name: 'main', component: main, meta: { requiresAuth: true } },
+  { path: '/users', name: 'users', component: users},
 ];
 
 const router = createRouter({

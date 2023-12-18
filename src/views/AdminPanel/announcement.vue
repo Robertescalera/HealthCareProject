@@ -61,12 +61,13 @@
         },
         drawerItems: [
         { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+          { title: 'Appointment', icon: 'mdi-lock', route: 'appointment' },
           { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
           { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
           { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
           { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
           { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+          { title: 'Users', icon: 'mdi-access-point', route: 'Users' },
         ],
       };
     },

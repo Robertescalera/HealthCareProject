@@ -120,13 +120,14 @@
       return {
         drawer: false,
         drawerItems: [
-          { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
-          { title: 'Analytics', icon: 'mdi-lock', route: 'analytic' },
+        { title: 'Dashboard', icon: 'mdi-account', route: 'adminpanel' },
+          { title: 'Appointment', icon: 'mdi-lock', route: 'appointment' },
           { title: 'Health Records', icon: 'mdi-access-point', route: 'HealthRecords' },
           { title: 'Survey', icon: 'mdi-access-point', route: 'survey' },
           { title: 'Inventory', icon: 'mdi-access-point', route: 'inventory' },
           { title: 'Barangay', icon: 'mdi-access-point', route: 'barangay' },
           { title: 'Announcement', icon: 'mdi-access-point', route: 'announcement' },
+          { title: 'Users', icon: 'mdi-access-point', route: 'Users' },
         ],
         tableData: [
           { baranggay: 'Baranggay 1', disease: 'Flu', deaths: 5, sick: 20, age: 20, gender: 'unknown'},
